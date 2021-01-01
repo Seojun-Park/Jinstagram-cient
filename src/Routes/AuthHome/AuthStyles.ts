@@ -1,37 +1,20 @@
 import styled from "styled-components";
 
+export const Wrapper = styled.div``;
+
 export const Container = styled.div`
-  @media screen and (min-width: 200px) and (max-width: 640px) {
-    padding: 0 20px;
+  @media (max-width: 768px) {
     display: flex;
-    flex-direction: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    border: 1px solid black;
   }
 
-  @media screen and (max-width: 640px) {
+  @media (min-width: 769px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 0 50px;
+    align-items: center;
+    border: 1px solid red;
   }
-`;
-
-export const WideScreen = styled.div`
-  @media screen and (min-width: 200px) and (max-width: 640px) {
-    display: none;
-  }
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 0 50px;
-  border: 1px solid black;
-`;
-
-export const NarrowScreen = styled.div`
-  @media screen and (min-width: 639px) {
-    display: none;
-  }
-  display: flex;
-  flex-direction: center;
-  align-items: center;
-  border: 1px solid black;
-  margin: 0 auto;
 `;

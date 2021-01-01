@@ -4,12 +4,10 @@ import * as S from './AuthStyles'
 
 const AuthHomePresenter = () => {
     return (
-        <S.Container>
+        <S.Wrapper>
             <Helmet><title>Auth | Jinstagram</title></Helmet>
-            <S.WideScreen>fisrt WideScreen</S.WideScreen>
-            <S.WideScreen>Second WideScreen</S.WideScreen>
-            <S.NarrowScreen>Auth home</S.NarrowScreen>
-        </S.Container>
+            <S.Container>Auth hum</S.Container>
+        </S.Wrapper>
     )
 }
 
