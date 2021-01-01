@@ -1,23 +1,24 @@
-import React from 'react';
+import { gql, useQuery } from '@apollo/client';
+import React, { createContext } from 'react';
+import { ThemeProvider } from 'styled-components';
+import theme from '../Styles/Theme'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const Is_LOGGED_IN = gql`
+query IsLoggedIn{
+  isLoggedIn @client
 }
+`
 
-export default App;
+const AppContext = createContext(null)
+
+const App = (): any => {
+  const { data: { isLoggedIn } } = useQuery(Is_LOGGED_IN)
+  return (
+    <AppContext.Provider value={isLoggedIn}>
+      <ThemeProvider theme={theme}>
+        "lolo"
+      </ThemeProvider>
+    </AppContext.Provider>
+  )
+}
+export default App
