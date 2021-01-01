@@ -1,6 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import React, { createContext } from 'react';
 import { ThemeProvider } from 'styled-components';
+import { HashRouter as Router } from 'react-router-dom'
 import theme from '../Styles/Theme'
 
 const Is_LOGGED_IN = gql`
@@ -16,7 +17,9 @@ const App = (): any => {
   return (
     <AppContext.Provider value={isLoggedIn}>
       <ThemeProvider theme={theme}>
-        "lolo"
+        <Router>
+          lala
+        </Router>
       </ThemeProvider>
     </AppContext.Provider>
   )
