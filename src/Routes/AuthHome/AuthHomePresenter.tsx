@@ -38,7 +38,7 @@ const AuthHomePresenter: FC<IProps> = ({
     setFirstName
 }) => {
     const responseByPlatform = (response: any): any => {
-        console.log(platform)
+        console.log(response);
     }
     return (
         <S.Wrapper>
@@ -64,6 +64,7 @@ const AuthHomePresenter: FC<IProps> = ({
                     </S.Mid>
                 }
                 <S.Bot>
+
                     <FacebookLogin
                         appId="306360554149080"
                         autoLoad={true}
@@ -71,6 +72,9 @@ const AuthHomePresenter: FC<IProps> = ({
                         callback={responseByPlatform}
                     />
                     <GoogleLogin
+                        render={renderProps => (
+                            <S.SocialButton onClick={renderProps.onClick} disabled={renderProps.disabled}>login with facebook</S.SocialButton>
+                        )}
                         clientId="653597209706-g73v027q056idqi93oetg0bp8k1s3vtd.apps.googleusercontent.com"
                         onSuccess={responseByPlatform}
                         onFailure={responseByPlatform}

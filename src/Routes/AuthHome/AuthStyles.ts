@@ -1,9 +1,5 @@
 import styled from "styled-components";
 
-interface IStyleProps {
-  connectTo: string;
-}
-
 const Box = styled.div`
   border: 1px solid #e6e6e6;
   border-radius: 4px;
@@ -11,8 +7,8 @@ const Box = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  height: 100vh;
-  width: 100vw;
+  height: 90vh;
+  width: 90vw;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -26,7 +22,7 @@ export const Container = styled(Box)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 60vh;
+  /* height: 60vh; */
   width: 350px;
   padding-top: 25px;
   padding-bottom: 25px;
@@ -64,7 +60,7 @@ export const Form = styled.form`
 `;
 
 export const Input = styled.input`
-  padding: 8px 12px;
+  padding: 12px 12px;
   width: 200px;
   border-radius: 4px;
   border: none;
@@ -73,9 +69,9 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-  margin-top: 25px;
+  margin-top: 15px;
   width: 225px;
-  padding: 8px 12px;
+  padding: 10px 0;
   border-radius: 4px;
   border: none;
   background-color: #3498db;
@@ -97,13 +93,15 @@ export const Bot = styled.div`
   padding-top: 15px;
 `;
 
-export const SocialButton = styled.button<IStyleProps>`
+export const SocialButton = styled.button`
   margin-top: 15px;
-  width: 225px;
-  padding: 8px 12px;
-  border-radius: 4px;
+  width: 215px;
+  padding: 18px 0;
   border: none;
-  background-color: ${(props) => props.connectTo};
+  background-color: #ff3e30;
+  text-transform: uppercase;
+  font-size: 15px;
+  font-weight: 500;
   color: white;
   cursor: pointer;
 `;
