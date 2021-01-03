@@ -13,7 +13,7 @@ const LoggedInRoutes = () => (
 const LoggedOutRoutes = () => (
     <Switch>
         <Route exact path="/" component={AuthHome} />
-        <Route path="/socialLogin" component={SocialLogin} />
+        <Route path="/socialLogin/:platform" component={SocialLogin} />
         <Redirect from="*" to="/" />
     </Switch>
 )

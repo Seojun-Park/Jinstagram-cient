@@ -1,7 +1,5 @@
 import { gql } from "@apollo/client";
 
-
-
 export const FACEBOOK_CONNECT = gql`
   mutation FacebookConnect(
     $firstName: String!
