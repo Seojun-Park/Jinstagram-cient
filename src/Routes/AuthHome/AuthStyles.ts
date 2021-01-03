@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface IStyleProps {
+  connectTo: string;
+}
+
 const Box = styled.div`
   border: 1px solid #e6e6e6;
   border-radius: 4px;
@@ -50,7 +54,6 @@ export const Title = styled.span`
 
 export const Mid = styled.div`
   padding: 12px;
-
   margin-bottom: 25px;
 `;
 
@@ -71,20 +74,38 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   margin-top: 25px;
+  width: 225px;
   padding: 8px 12px;
   border-radius: 4px;
   border: none;
   background-color: #3498db;
   color: white;
+  cursor: pointer;
+`;
+
+export const Signup = styled.span`
+  padding-top: 15px;
 `;
 
 export const Bot = styled.div`
   border-top: 1px solid #c7c7c7;
   width: 300px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 35px;
+  padding-top: 15px;
+`;
+
+export const SocialButton = styled.button<IStyleProps>`
+  margin-top: 15px;
+  width: 225px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  background-color: ${(props) => props.connectTo};
+  color: white;
+  cursor: pointer;
 `;
 
 export const Link = styled.span`

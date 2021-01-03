@@ -42,15 +42,13 @@ const AuthHomePresenter: FC<IProps> = ({
                             />
                             <S.Button>Login</S.Button>
                         </S.Form>
-                        <>
-                            Don't have an account?{"   "}
-                            <S.Link onClick={() => setAction("signup")}>Sign Up</S.Link>
-                        </>
+                        <S.Signup>Don't have an account? </S.Signup>
+                        <S.Link onClick={() => setAction("signup")}>Sign Up</S.Link>
                     </S.Mid>
                 }
                 <S.Bot>
-                    <>
-                    </>
+                    <S.SocialButton connectTo={"#3b5998"}>Connect with Facebook</S.SocialButton>
+                    <S.SocialButton connectTo={"#de5246"}>Connect with Google</S.SocialButton>
                 </S.Bot>
             </S.Container>
             <Footer />
