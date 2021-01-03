@@ -29,12 +29,23 @@ export const Container = styled(Box)`
   margin-bottom: 40px;
 `;
 
-export const Head = styled.div``;
+export const Head = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const Logo = styled.img`
   width: 80px;
   height: 80px;
   object-fit: contain;
+`;
+
+export const Title = styled.span`
+  font-size: 24px;
+  color: #999;
+  font-weight: 600;
 `;
 
 export const Mid = styled.div`
@@ -46,22 +57,29 @@ export const Mid = styled.div`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  margin-bottom: 15px;
 `;
 
 export const Input = styled.input`
   padding: 8px 12px;
   width: 200px;
   border-radius: 4px;
+  border: none;
+  background-color: #c7c7c7;
+  text-align: center;
 `;
 
 export const Button = styled.button`
   margin-top: 25px;
   padding: 8px 12px;
   border-radius: 4px;
+  border: none;
+  background-color: #3498db;
+  color: white;
 `;
 
 export const Bot = styled.div`
-  border-top: 1px solid #e6e6e6;
+  border-top: 1px solid #c7c7c7;
   width: 300px;
   display: flex;
   justify-content: center;

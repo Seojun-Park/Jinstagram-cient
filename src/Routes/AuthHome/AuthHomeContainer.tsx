@@ -27,6 +27,8 @@ const AuthHomeContainer = () => {
             email={email}
             emailChange={emailChange}
             onSubmit={onSubmit}
+            secret={secret}
+            secretChange={secretChange}
         />
     )
 }

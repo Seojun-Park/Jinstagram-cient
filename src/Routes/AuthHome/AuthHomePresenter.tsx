@@ -11,6 +11,9 @@ interface IProps {
     emailChange: (
         e: React.ChangeEvent<HTMLInputElement>) => void
     onSubmit: any
+    secret: string
+    secretChange: (
+        e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const AuthHomePresenter: FC<IProps> = ({
@@ -26,6 +29,7 @@ const AuthHomePresenter: FC<IProps> = ({
             <S.Container>
                 <S.Head>
                     <S.Logo src={logo} alt="logo" />
+                    {action === "login" && <S.Title>Login</S.Title>}
                 </S.Head>
                 {action === "login" &&
                     <S.Mid>
@@ -38,12 +42,14 @@ const AuthHomePresenter: FC<IProps> = ({
                             />
                             <S.Button>Login</S.Button>
                         </S.Form>
+                        <>
+                            Don't have an account?{"   "}
+                            <S.Link onClick={() => setAction("signup")}>Sign Up</S.Link>
+                        </>
                     </S.Mid>
                 }
                 <S.Bot>
                     <>
-                        Don't have an account?
-                    <S.Link onClick={() => setAction("signup")}>Sign Up</S.Link>
                     </>
                 </S.Bot>
             </S.Container>
