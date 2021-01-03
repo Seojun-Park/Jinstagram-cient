@@ -36,6 +36,7 @@ export interface FacebookConnectVariables {
   lastName: string;
   email: string;
   fbId: string;
+  profilePhoto?: string | null;
 }
 
 /* tslint:disable */

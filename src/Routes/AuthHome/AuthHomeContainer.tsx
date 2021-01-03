@@ -1,6 +1,8 @@
 
 import { useMutation } from '@apollo/client'
 import React, { useState } from 'react'
+import { toast } from 'react-toastify'
+import { userLogIn } from '../../Apollo/authResolvers'
 import useInput from '../../Hooks/useInput'
 import { FacebookConnect, FacebookConnectVariables, GoogleConnect, GoogleConnectVariables } from '../../types/api'
 import AuthHomePresenter from './AuthHomePresenter'
@@ -21,14 +23,15 @@ const AuthHomeContainer = () => {
             variables: {
                 firstName,
                 lastName,
-                email,
-                fbId
+                email: socialEmail,
+                fbId,
+                profilePhoto
             },
             onCompleted: ({ FacebookConnect: result }) => {
                 const { ok, err, token } = result
                 if (ok) {
                     if (token) {
-                        console.log(token)
+                        userLogIn(token)
                     }
                 } else {
                     console.log(err)
@@ -42,14 +45,15 @@ const AuthHomeContainer = () => {
             variables: {
                 firstName,
                 lastName,
-                email,
+                email: socialEmail,
                 googleId
             },
             onCompleted: ({ GoogleConnect: result }) => {
                 const { ok, err, token } = result;
                 if (ok) {
                     if (token) {
-                        console.log(token)
+                        userLogIn(token)
+                        toast.success("Connected")
                     }
                 } else {
                     console.log(err)
@@ -86,6 +90,8 @@ const AuthHomeContainer = () => {
             setSocialEmail={setSocialEmail}
             setLastName={setLastName}
             setFirstName={setFirstName}
+            FacebookLoginMutation={FacebookLoginMutation}
+            GoogleLoginMutatation={GoogleLoginMutatation}
         />
     )
 }

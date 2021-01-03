@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, ReactElement } from 'react'
 import Footer from '../../Components/Footer'
 import Helmet from 'react-helmet'
 import logo from '../../Asset/logo.png'
@@ -22,6 +22,8 @@ interface IProps {
     setSocialEmail: React.Dispatch<React.SetStateAction<string>>
     setLastName: React.Dispatch<React.SetStateAction<string>>
     setFirstName: React.Dispatch<React.SetStateAction<string>>
+    FacebookLoginMutation: any
+    GoogleLoginMutatation: any
 }
 
 const AuthHomePresenter: FC<IProps> = ({
@@ -35,10 +37,27 @@ const AuthHomePresenter: FC<IProps> = ({
     setProfilePhoto,
     setSocialEmail,
     setLastName,
-    setFirstName
-}) => {
-    const responseByPlatform = (response: any): any => {
-        console.log(response);
+    setFirstName,
+    FacebookLoginMutation,
+    GoogleLoginMutatation
+}): ReactElement => {
+    const responseFromFacebook = (response: any): any => {
+        const { name, email, userID, picture }: any = response
+        setFirstName(name.split(" ")[0])
+        setLastName(name.split(" ")[name.split(" ").length - 1])
+        setSocialEmail(email)
+        setFbId(userID)
+        setProfilePhoto(picture.data.url)
+        FacebookLoginMutation();
+
+    }
+    const responseFromGoogle = (response: any): any => {
+        const { email, familyName, givenName, googleId } = response.profileObj
+        setFirstName(givenName)
+        setLastName(familyName)
+        setGoogleId(googleId)
+        setSocialEmail(email)
+        GoogleLoginMutatation();
     }
     return (
         <S.Wrapper>
@@ -64,20 +83,19 @@ const AuthHomePresenter: FC<IProps> = ({
                     </S.Mid>
                 }
                 <S.Bot>
-
                     <FacebookLogin
                         appId="306360554149080"
                         autoLoad={true}
                         fields="name, email,picture"
-                        callback={responseByPlatform}
+                        callback={responseFromFacebook}
                     />
                     <GoogleLogin
                         render={renderProps => (
                             <S.SocialButton onClick={renderProps.onClick} disabled={renderProps.disabled}>login with facebook</S.SocialButton>
                         )}
                         clientId="653597209706-g73v027q056idqi93oetg0bp8k1s3vtd.apps.googleusercontent.com"
-                        onSuccess={responseByPlatform}
-                        onFailure={responseByPlatform}
+                        onSuccess={responseFromGoogle}
+                        onFailure={responseFromGoogle}
                         cookiePolicy={"single_host_origin"}
                     />
                 </S.Bot>

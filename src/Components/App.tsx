@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 import { HashRouter as Router } from 'react-router-dom'
 import Routes from './Routes'
 import theme from '../Styles/Theme'
+import { ToastContainer } from 'react-toastify';
 
 const Is_LOGGED_IN = gql`
 query IsLoggedIn{
@@ -22,6 +23,7 @@ const App = (): any => {
           <Routes isLoggedIn={isLoggedIn} />
         </Router>
       </ThemeProvider>
+      <ToastContainer draggable={true} position={"bottom-center"} />
     </AppContext.Provider>
   )
 }

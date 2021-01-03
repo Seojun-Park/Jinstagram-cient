@@ -6,12 +6,14 @@ export const FACEBOOK_CONNECT = gql`
     $lastName: String!
     $email: String!
     $fbId: String!
+    $profilePhoto: String
   ) {
     FacebookConnect(
       firstName: $firstName
       lastName: $lastName
       email: $email
       fbId: $fbId
+      profilePhoto: $profilePhoto
     ) {
       ok
       err
