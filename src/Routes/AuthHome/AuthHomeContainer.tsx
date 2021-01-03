@@ -1,9 +1,11 @@
+
 import React, { useState } from 'react'
 import useInput from '../../Hooks/useInput'
 import AuthHomePresenter from './AuthHomePresenter'
 
 const AuthHomeContainer = () => {
     const [email, emailChange] = useInput("")
+    const [firstName, setFirstName] = useState("")
     const [secret, secretChange] = useInput("")
     const [action, setAction] = useState<any>("login")
 

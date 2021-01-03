@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Home from '../Routes/Home'
 import AuthHome from '../Routes/AuthHome'
+import SocialLogin from '../Routes/SocialLogin'
 
 const LoggedInRoutes = () => (
     <Switch>
@@ -12,6 +13,7 @@ const LoggedInRoutes = () => (
 const LoggedOutRoutes = () => (
     <Switch>
         <Route exact path="/" component={AuthHome} />
+        <Route path="/socialLogin" component={SocialLogin} />
         <Redirect from="*" to="/" />
     </Switch>
 )

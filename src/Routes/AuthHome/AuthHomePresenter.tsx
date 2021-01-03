@@ -23,6 +23,7 @@ const AuthHomePresenter: FC<IProps> = ({
     emailChange,
     onSubmit
 }) => {
+
     return (
         <S.Wrapper>
             <Helmet><title>Auth | Jinstagram</title></Helmet>
