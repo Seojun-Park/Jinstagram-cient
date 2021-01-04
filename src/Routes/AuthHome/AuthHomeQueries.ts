@@ -41,3 +41,44 @@ export const GOOGLE_CONNECT = gql`
     }
   }
 `;
+
+export const CREATE_ACCOUNT = gql`
+  mutation CreateAccount(
+    $username: String!
+    $email: String!
+    $firstName: String!
+    $lastName: String!
+    $intro: String!
+  ) {
+    CreateAccount(
+      username: $username
+      email: $email
+      firstName: $firstName
+      lastName: $lastName
+      intro: $intro
+    ) {
+      ok
+      err
+    }
+  }
+`;
+
+export const REQUEST_CODE = gql`
+  mutation RequestCode($email: String!) {
+    RequestCode(email: $email) {
+      ok
+      err
+      code
+    }
+  }
+`;
+
+export const CONFIRM_SECRET = gql`
+  mutation ConfirmSecret($email: String!, $code: String!) {
+    ConfirmSecret(email: $email, code: $code){
+      ok
+      err
+      token
+    }
+  }
+`;

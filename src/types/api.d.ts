@@ -72,6 +72,82 @@ export interface GoogleConnectVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: CreateAccount
+// ====================================================
+
+export interface CreateAccount_CreateAccount {
+  __typename: "CreateAccountResponse";
+  ok: boolean;
+  err: string | null;
+}
+
+export interface CreateAccount {
+  CreateAccount: CreateAccount_CreateAccount;
+}
+
+export interface CreateAccountVariables {
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  intro: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: RequestCode
+// ====================================================
+
+export interface RequestCode_RequestCode {
+  __typename: "RequestCodeResponse";
+  ok: boolean;
+  err: string | null;
+  code: string | null;
+}
+
+export interface RequestCode {
+  RequestCode: RequestCode_RequestCode;
+}
+
+export interface RequestCodeVariables {
+  email: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: ConfirmSecret
+// ====================================================
+
+export interface ConfirmSecret_ConfirmSecret {
+  __typename: "ConfirmSecretResponse";
+  ok: boolean;
+  err: string | null;
+  token: string | null;
+}
+
+export interface ConfirmSecret {
+  ConfirmSecret: ConfirmSecret_ConfirmSecret;
+}
+
+export interface ConfirmSecretVariables {
+  email: string;
+  code: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: Me
 // ====================================================
 

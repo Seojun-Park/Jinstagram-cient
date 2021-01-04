@@ -22,6 +22,18 @@ interface IProps {
     setSocialEmail: React.Dispatch<React.SetStateAction<string>>
     setLastName: React.Dispatch<React.SetStateAction<string>>
     setFirstName: React.Dispatch<React.SetStateAction<string>>
+    setUserName: (
+        e: React.ChangeEvent<HTMLInputElement>) => void
+    setIntro: (
+        e: React.ChangeEvent<HTMLInputElement>) => void
+    setSignUpFirstName: (
+        e: React.ChangeEvent<HTMLInputElement>) => void
+    setSignUpLastName: (
+        e: React.ChangeEvent<HTMLInputElement>) => void
+    username: string
+    intro: string
+    signUpFirstName: string
+    signUpLastName: string
     FacebookLoginMutation: any
     GoogleLoginMutatation: any
 }
@@ -38,6 +50,14 @@ const AuthHomePresenter: FC<IProps> = ({
     setSocialEmail,
     setLastName,
     setFirstName,
+    setUserName,
+    setIntro,
+    setSignUpFirstName,
+    setSignUpLastName,
+    username,
+    intro,
+    signUpFirstName,
+    signUpLastName,
     FacebookLoginMutation,
     GoogleLoginMutatation
 }): ReactElement => {
@@ -82,15 +102,49 @@ const AuthHomePresenter: FC<IProps> = ({
                         <S.Link onClick={() => setAction("signup")}>Sign Up</S.Link>
                     </S.Mid>
                 }
+                {action === "signup" && (
+                    <S.Mid>
+                        <S.Form onSubmit={onSubmit}>
+                            <S.Input
+                                placeholder="Email"
+                                value={email}
+                                onChange={emailChange}
+                                autoFocus={true}
+                            />
+                            <S.Input
+                                placeholder="First Name"
+                                value={signUpFirstName}
+                                onChange={setSignUpFirstName}
+                                autoFocus={true}
+                            />
+                            <S.Input
+                                placeholder="Last Name"
+                                value={signUpLastName}
+                                onChange={setSignUpLastName}
+                                autoFocus={true}
+                            />
+                            <S.Input
+                                placeholder="Username"
+                                value={username}
+                                onChange={setUserName}
+                                autoFocus={true}
+                            />
+                            <S.Input
+                                placeholder="intro"
+                                value={intro}
+                                onChange={setIntro}
+                                autoFocus={true}
+                            />
+                            <S.Button>Confirm</S.Button>
+                        </S.Form>
+                    </S.Mid>
+                )}
                 <S.Bot>
                     <FacebookLogin
                         appId="306360554149080"
                         autoLoad={true}
                         fields="name, email,picture"
                         callback={responseFromFacebook}
-                        render={renderProps => (
-                            <S.SocialButton onClick={renderProps.onClick}>Facebook</S.SocialButton>
-                        )}
                     />
                     <GoogleLogin
                         render={renderProps => (
