@@ -6,6 +6,10 @@ ${reset}
 *{
     box-sizing: border-box
 }
+html{
+    margin:0;
+    padding:0;
+}
 body{
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
                Roboto, Oxygen-Sans, Ubuntu, Cantarell,
