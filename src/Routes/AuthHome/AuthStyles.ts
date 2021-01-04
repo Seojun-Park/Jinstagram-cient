@@ -27,6 +27,7 @@ export const Container = styled(Box)`
   padding-top: 25px;
   padding-bottom: 25px;
   margin-bottom: 40px;
+  margin-top: 150px;
 `;
 
 export const Head = styled.div`
@@ -64,7 +65,7 @@ export const Input = styled.input`
   width: 200px;
   border-radius: 4px;
   border: none;
-  background-color: #c7c7c7;
+  background-color: #e6e6e6;
   text-align: center;
 `;
 
@@ -109,4 +110,16 @@ export const SocialButton = styled.button`
 export const Link = styled.span`
   cursor: pointer;
   color: #3498db;
+`;
+
+export const SignUpInput = styled.input`
+  padding: 12px 12px;
+  width: 200px;
+  border-radius: 4px;
+  border: none;
+  background-color: #e6e6e6;
+  text-align: center;
+  &:not(:last-child) {
+    margin-bottom: 15px;
+  }
 `;

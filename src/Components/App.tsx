@@ -5,6 +5,7 @@ import { HashRouter as Router } from 'react-router-dom'
 import Routes from './Routes'
 import theme from '../Styles/Theme'
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Is_LOGGED_IN = gql`
 query IsLoggedIn{

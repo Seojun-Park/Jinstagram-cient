@@ -41,6 +41,8 @@ interface IProps {
 const AuthHomePresenter: FC<IProps> = ({
     action,
     setAction,
+    secret,
+    secretChange,
     email,
     emailChange,
     onSubmit,
@@ -105,34 +107,47 @@ const AuthHomePresenter: FC<IProps> = ({
                 {action === "signup" && (
                     <S.Mid>
                         <S.Form onSubmit={onSubmit}>
-                            <S.Input
+                            <S.SignUpInput
                                 placeholder="Email"
                                 value={email}
                                 onChange={emailChange}
                                 autoFocus={true}
                             />
-                            <S.Input
+                            <S.SignUpInput
                                 placeholder="First Name"
                                 value={signUpFirstName}
                                 onChange={setSignUpFirstName}
                                 autoFocus={true}
                             />
-                            <S.Input
+                            <S.SignUpInput
                                 placeholder="Last Name"
                                 value={signUpLastName}
                                 onChange={setSignUpLastName}
                                 autoFocus={true}
                             />
-                            <S.Input
+                            <S.SignUpInput
                                 placeholder="Username"
                                 value={username}
                                 onChange={setUserName}
                                 autoFocus={true}
                             />
-                            <S.Input
+                            <S.SignUpInput
                                 placeholder="intro"
                                 value={intro}
                                 onChange={setIntro}
+                                autoFocus={true}
+                            />
+                            <S.Button>Confirm</S.Button>
+                        </S.Form>
+                    </S.Mid>
+                )}
+                {action === "confirm" && (
+                    <S.Mid>
+                        <S.Form onSubmit={onSubmit}>
+                            <S.SignUpInput
+                                placeholder="code"
+                                value={secret}
+                                onChange={secretChange}
                                 autoFocus={true}
                             />
                             <S.Button>Confirm</S.Button>

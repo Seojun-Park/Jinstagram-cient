@@ -128,7 +128,6 @@ const AuthHomeContainer = () => {
                         toast.error("You don't have an account yet. Sign up now");
                         setTimeout(() => setAction("signup"), 2000)
                     } else {
-                        toast.success("Check your secretcode in your email")
                         setAction("confirm")
                     }
                 } catch {

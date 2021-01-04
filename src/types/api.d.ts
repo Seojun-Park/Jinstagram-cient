@@ -148,6 +148,70 @@ export interface ConfirmSecretVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetFollowedPost
+// ====================================================
+
+export interface GetFollowedPost_GetFollowedPost_post_user {
+  __typename: "User";
+  id: number;
+  username: string;
+}
+
+export interface GetFollowedPost_GetFollowedPost_post_images {
+  __typename: "Image";
+  url: string;
+}
+
+export interface GetFollowedPost_GetFollowedPost_post_comments {
+  __typename: "Comment";
+  id: number;
+  text: string;
+}
+
+export interface GetFollowedPost_GetFollowedPost_post_likes_user {
+  __typename: "User";
+  id: number;
+  username: string;
+}
+
+export interface GetFollowedPost_GetFollowedPost_post_likes {
+  __typename: "Like";
+  user: GetFollowedPost_GetFollowedPost_post_likes_user;
+}
+
+export interface GetFollowedPost_GetFollowedPost_post {
+  __typename: "Post";
+  id: number;
+  caption: string | null;
+  location: string | null;
+  user: GetFollowedPost_GetFollowedPost_post_user;
+  images: (GetFollowedPost_GetFollowedPost_post_images | null)[] | null;
+  comments: (GetFollowedPost_GetFollowedPost_post_comments | null)[] | null;
+  isLiked: boolean | null;
+  likes: (GetFollowedPost_GetFollowedPost_post_likes | null)[] | null;
+}
+
+export interface GetFollowedPost_GetFollowedPost {
+  __typename: "GetFollowedPostResponse";
+  ok: boolean;
+  err: string | null;
+  post: (GetFollowedPost_GetFollowedPost_post | null)[] | null;
+}
+
+export interface GetFollowedPost {
+  GetFollowedPost: GetFollowedPost_GetFollowedPost;
+}
+
+export interface GetFollowedPostVariables {
+  page: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: Me
 // ====================================================
 
