@@ -1,6 +1,12 @@
 import React from 'react'
 
-const HomePresenter = () => {
+interface IProps {
+    me: object
+}
+
+const HomePresenter: React.FC<IProps> = ({ me }) => {
+    console.log(me)
+
     return (
         <>
             home

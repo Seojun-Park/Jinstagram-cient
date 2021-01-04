@@ -6,16 +6,22 @@ import HomePresenter from './HomePresenter'
 
 
 const HomeContainer = () => {
-    const [me, setMe] = useState()
+    const [me, setMe] = useState<any>()
 
     const { loading, error } = useQuery<Me>(ME, {
         onCompleted: ({ Me }) => {
-            console.log(Me)
+            const { ok, err, user } = Me
+            if (ok && user) {
+                setMe(user);
+            }
         }
     })
-    console.log(error)
+
+    if (loading) {
+        return (<>Loading...</>)
+    }
     return (
-        <HomePresenter />
+        <HomePresenter me={me} />
     )
 }
 
