@@ -88,10 +88,13 @@ const AuthHomePresenter: FC<IProps> = ({
                         autoLoad={true}
                         fields="name, email,picture"
                         callback={responseFromFacebook}
+                        render={renderProps => (
+                            <S.SocialButton onClick={renderProps.onClick}>Facebook</S.SocialButton>
+                        )}
                     />
                     <GoogleLogin
                         render={renderProps => (
-                            <S.SocialButton onClick={renderProps.onClick} disabled={renderProps.disabled}>login with facebook</S.SocialButton>
+                            <S.SocialButton onClick={renderProps.onClick} disabled={renderProps.disabled}>login with Google</S.SocialButton>
                         )}
                         clientId="653597209706-g73v027q056idqi93oetg0bp8k1s3vtd.apps.googleusercontent.com"
                         onSuccess={responseFromGoogle}

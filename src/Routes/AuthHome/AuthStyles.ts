@@ -95,7 +95,7 @@ export const Bot = styled.div`
 
 export const SocialButton = styled.button`
   margin-top: 15px;
-  width: 225px;
+  width: 215px;
   padding: 18px 0;
   border: none;
   background-color: #ff3e30;
