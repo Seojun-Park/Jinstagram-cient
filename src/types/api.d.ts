@@ -212,6 +212,37 @@ export interface GetFollowedPostVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: SearchUser
+// ====================================================
+
+export interface SearchUser_SearchUser_users {
+  __typename: "User";
+  id: number;
+  username: string;
+  profilePhoto: string | null;
+}
+
+export interface SearchUser_SearchUser {
+  __typename: "SearchUserResponse";
+  ok: boolean;
+  err: string | null;
+  users: (SearchUser_SearchUser_users | null)[] | null;
+}
+
+export interface SearchUser {
+  SearchUser: SearchUser_SearchUser;
+}
+
+export interface SearchUserVariables {
+  term: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: Me
 // ====================================================
 

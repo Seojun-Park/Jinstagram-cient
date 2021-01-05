@@ -31,3 +31,17 @@ export const GET_FOLLOW_POST = gql`
     }
   }
 `;
+
+export const SEARCH_USER = gql`
+  query SearchUser($term: String!) {
+    SearchUser(term: $term) {
+      ok
+      err
+      users {
+        id
+        username
+        profilePhoto
+      }
+    }
+  }
+`;

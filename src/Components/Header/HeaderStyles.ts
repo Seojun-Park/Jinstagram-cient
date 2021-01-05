@@ -1,7 +1,7 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
-  border: 1px solid black;
   width: 100%;
   height: 4rem;
   display: flex;
@@ -10,10 +10,8 @@ export const Container = styled.div`
 `;
 
 export const Col = styled.div`
-  border: 1px solid red;
   height: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0 25px;
@@ -22,21 +20,21 @@ export const Col = styled.div`
 
 export const Search = styled.input`
   padding: 12px 12px;
-  width: 200px;
+  width: 300px;
   border-radius: 4px;
   border: none;
   background-color: #e6e6e6;
   text-align: center;
 `;
 
-export const MenuButton = styled.button``;
-
-export const Menu = styled.div`
-  @media screen and (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-  }
-  display: none;
+export const ExtendedLink = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-export const ItemButton = styled.button``;
+export const ProfileImage = styled.img`
+  width: 50px;
+  object-fit: cover;
+  border-radius: 10rem;
+`;
