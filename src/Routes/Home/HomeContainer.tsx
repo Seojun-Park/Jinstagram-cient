@@ -69,7 +69,7 @@ const HomeContainer = () => {
         return (<>Loading...</>)
     } else {
         return (
-            <HomePresenter me={me} term={term} termChange={termChange} />
+            <HomePresenter me={me} term={term} termChange={termChange} posts={posts} />
         )
     }
 }

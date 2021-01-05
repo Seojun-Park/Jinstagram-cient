@@ -1,9 +1,13 @@
 import React from 'react'
 import FeedBoxPresenter from './FeedBoxPresenter'
 
-const FeedBoxContainer = () => {
+interface IProps {
+    posts: any
+}
+
+const FeedBoxContainer: React.FC<IProps> = ({ posts }) => {
     return (
-        <FeedBoxPresenter />
+        <FeedBoxPresenter posts={posts} />
     )
 }
 
