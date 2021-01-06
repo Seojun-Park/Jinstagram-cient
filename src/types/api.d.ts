@@ -243,6 +243,31 @@ export interface SearchUserVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: UploadPost
+// ====================================================
+
+export interface UploadPost_UploadPost {
+  __typename: "UploadPostResponse";
+  ok: boolean;
+  err: string | null;
+}
+
+export interface UploadPost {
+  UploadPost: UploadPost_UploadPost;
+}
+
+export interface UploadPostVariables {
+  location?: string | null;
+  caption?: string | null;
+  images?: (string | null)[] | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: Me
 // ====================================================
 

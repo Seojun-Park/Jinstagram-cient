@@ -1,7 +1,9 @@
 
-import React from 'react'
+import React, { useCallback } from 'react'
 import Header from '../../Components/Header'
 import FeedBox from '../../Components/FeedBox'
+import { useDropzone } from 'react-dropzone'
+import { ImageUpload } from '../../Components/Icon'
 import * as S from './HomeStyles'
 
 interface IProps {
@@ -10,19 +12,54 @@ interface IProps {
     term: string
     termChange: (
         e: React.ChangeEvent<HTMLInputElement>) => void
+    imageUrl: any
+    setImageUrl: any
+    progress: number
+    handleUpload: (
+        e: React.ChangeEvent<HTMLInputElement>) => void
+    flag: boolean
+    caption: string
+    setCaption: (
+        e: React.ChangeEvent<HTMLTextAreaElement>) => void
+    UploadPostMutation: any
+
 }
 
 const HomePresenter: React.FC<IProps> = ({
     me,
     term,
     termChange,
-    posts
+    posts,
+    imageUrl,
+    setImageUrl,
+    handleUpload,
+    progress,
+    flag,
+    caption,
+    setCaption,
+    UploadPostMutation
 }) => {
+    const { getRootProps, getInputProps } = useDropzone({ accept: "image/png, image/jpeg" })
     return (
         <S.Wrapper>
             <Header url={me.profilePhoto} term={term} termChange={termChange} />
             <S.Container>
-                Upload image
+                <S.Post>
+                    <S.Textarea
+                        placeholder="Add a caption"
+                        value={caption}
+                        onChange={setCaption}
+                    />
+                    <S.Row>
+                        <S.UploadDiv {...getRootProps()}>
+                            <input {...getInputProps()} onChange={handleUpload} />
+                            {flag ? (progress !== 100 ? "loading" : "preview?")
+                                : <ImageUpload />
+                            }
+                        </S.UploadDiv>
+                        "upload button"
+                    </S.Row>
+                </S.Post>
                 {me.following === null ? "you don't follow anyone" : "so on"}
                 {/* map method will be done on here */}
                 <FeedBox posts={posts} />

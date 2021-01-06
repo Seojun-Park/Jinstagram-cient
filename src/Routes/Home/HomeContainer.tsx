@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { storage } from '../../Firebase'
@@ -9,16 +9,20 @@ import {
     GetFollowedPostVariables,
     Me,
     SearchUser,
-    SearchUserVariables
+    SearchUserVariables,
+    UploadPost,
+    UploadPostVariables
 } from '../../types/api'
 import HomePresenter from './HomePresenter'
-import { GET_FOLLOW_POST, SEARCH_USER } from './HomeQueries'
+import { GET_FOLLOW_POST, SEARCH_USER, UPLOAD_POST } from './HomeQueries'
 
 
 const HomeContainer = () => {
     const [me, setMe] = useState<any>();
     const [flag, setFlag] = useState<boolean>(false);
-    const [imageURL, setImageURL] = useState<any>();
+    const [images, setImages] = useState<any>()
+    const [caption, setCaption] = useInput("")
+    const [imageUrl, setImageUrl] = useState<string[]>();
     const [progress, setProgress] = useState(1);
     const [page, setPage] = useState<number>(1);
     const [term, termChange] = useInput("")
@@ -52,6 +56,7 @@ const HomeContainer = () => {
         }
     })
 
+
     useQuery<SearchUser, SearchUserVariables>(SEARCH_USER, {
         skip: term === "",
         variables: {
@@ -69,35 +74,80 @@ const HomeContainer = () => {
         }
     })
 
-    useEffect(() => {
-        if (flag && me) {
-            let uploadTask = storage
-                .ref(`/${me.username}/profilePhoto`)
-                .put(imageURL);
-            uploadTask.on(
-                "state_changed",
-                (snapshot) => {
-                    const percentUploaded = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
-                    setProgress(percentUploaded)
-                },
-                (err) => { console.log(err) },
-                () => {
-                    storage.ref(`/${me.username}/`)
-                        .child('profilePhoto')
-                        .getDownloadURL()
-                        .then((url) => {
-                            setImageURL(url)
-                        })
-                }
-            )
+    const [UploadPostMutation] = useMutation<UploadPost, UploadPostVariables>(UPLOAD_POST, {
+        variables: {
+            caption,
+            location: "",
+            images: [""]
         }
-    }, [flag, me, setProgress, imageURL])
+    })
+
+    const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault()
+        if (event.target && event.target.files) {
+            if (event.target !== null && event.target.files && event.target.files.length !== null) {
+                setImages(event.target.files)
+                setFlag(true);
+            }
+        }
+    }
+
+
+    // useEffect(() => {
+    //     if (flag && me) {
+    //         let uploadTask = storage
+    //             .ref(`/${me.username}/images`)
+    //             .put(images);
+    //         uploadTask.on(
+    //             "state_changed",
+    //             (snapshot) => {
+    //                 const percentUploaded = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+    //                 setProgress(percentUploaded)
+    //             },
+    //             (err) => { console.log(err) },
+    //             () => {
+    //                 storage.ref(`/${me.username}/`)
+    //                     .child('images')
+    //                     .getDownloadURL()
+    //                     .then((url) => {
+    //                         setImageUrl(url)
+    //                     })
+    //             }
+    //         )
+    //     }
+    // }, [flag, me, setProgress, images, setImageUrl])
+
+    useEffect(() => {
+        if (flag && me && images) {
+            for (let i = 0; i < images.length; i++) {
+                console.log(images[i]);
+            }
+        }
+    }, [flag, me, images])
+
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((pos) =>
+            console.log(pos))
+    }, [])
 
     if (loading || me === undefined) {
         return (<>Loading...</>)
     } else {
         return (
-            <HomePresenter me={me} term={term} termChange={termChange} posts={posts} />
+            <HomePresenter me={me}
+                term={term}
+                termChange={termChange}
+                posts={posts}
+                imageUrl={imageUrl}
+                flag={flag}
+                setImageUrl={setImageUrl}
+                progress={progress}
+                handleUpload={handleUpload}
+                caption={caption}
+                setCaption={setCaption}
+                UploadPostMutation={UploadPostMutation}
+            />
         )
     }
 }

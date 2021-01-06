@@ -45,3 +45,12 @@ export const SEARCH_USER = gql`
     }
   }
 `;
+
+export const UPLOAD_POST = gql`
+  mutation UploadPost($location: String, $caption: String, $images: [String]) {
+    UploadPost(location: $location, caption: $caption, images: $images) {
+      ok
+      err
+    }
+  }
+`;
