@@ -10,6 +10,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 600px;
 `;
 
 export const Post = styled.div`

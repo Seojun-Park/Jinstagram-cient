@@ -1,5 +1,5 @@
 
-import React, { useCallback } from 'react'
+import React from 'react'
 import Header from '../../Components/Header'
 import FeedBox from '../../Components/FeedBox'
 import { useDropzone } from 'react-dropzone'
