@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@apollo/client'
 import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { storage } from '../../Firebase'
-import useInput from '../../Hooks/useInput'
+import { getAddress } from '../../Hooks/Geocoding'
 import { ME } from '../../sharedquaries'
 import {
     GetFollowedPost,
@@ -14,7 +14,12 @@ import {
     UploadPostVariables
 } from '../../types/api'
 import HomePresenter from './HomePresenter'
-import { GET_FOLLOW_POST, SEARCH_USER, UPLOAD_POST } from './HomeQueries'
+import useInput from '../../Hooks/useInput'
+import {
+    GET_FOLLOW_POST,
+    SEARCH_USER,
+    UPLOAD_POST
+} from './HomeQueries'
 
 
 const HomeContainer = () => {
@@ -28,6 +33,8 @@ const HomeContainer = () => {
     const [term, termChange] = useInput("")
     const [posts, setPosts] = useState<any>();
     const [searchedUser, setSearchedUser] = useState<any>()
+    const [lat, setLat] = useState<number>(0)
+    const [lng, setLng] = useState<number>(0)
 
     const { loading } = useQuery<Me>(ME, {
         onCompleted: ({ Me }) => {
@@ -120,9 +127,20 @@ const HomeContainer = () => {
     }, [flag, me, images])
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition((pos) =>
-            console.log(pos))
-    }, [])
+        navigator.geolocation.getCurrentPosition((pos) => {
+            if (pos && pos.coords) {
+                setLat(pos.coords.latitude);
+                setLng(pos.coords.longitude)
+            }
+        })
+    }, [setLat, setLng])
+
+    useEffect(() => {
+        if (lat !== 0 && lng !== 0) {
+            getAddress(lat, lng);
+        }
+    }, [lat, lng])
+    console.log(lat, lng)
 
     if (loading || me === undefined) {
         return (<>Loading...</>)
