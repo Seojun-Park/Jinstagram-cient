@@ -22,8 +22,8 @@ const HomePresenter: React.FC<IProps> = ({
         <S.Wrapper>
             <Header url={me.profilePhoto} term={term} termChange={termChange} />
             <S.Container>
+                Upload image
                 {me.following === null ? "you don't follow anyone" : "so on"}
-                
                 {/* map method will be done on here */}
                 <FeedBox posts={posts} />
             </S.Container>

@@ -64,13 +64,17 @@ const AuthHomePresenter: FC<IProps> = ({
     GoogleLoginMutatation
 }): ReactElement => {
     const responseFromFacebook = (response: any): any => {
-        const { name, email, userID, picture }: any = response
-        setFirstName(name.split(" ")[0])
-        setLastName(name.split(" ")[name.split(" ").length - 1])
-        setSocialEmail(email)
-        setFbId(userID)
-        setProfilePhoto(picture.data.url)
-        FacebookLoginMutation();
+        const { name, email, userID, picture }: any = response;
+        if (name === undefined) {
+            console.log("error")
+        } else {
+            setFirstName(name.split(" ")[0])
+            setLastName(name.split(" ")[name.split(" ").length - 1])
+            setSocialEmail(email)
+            setFbId(userID)
+            setProfilePhoto(picture.data.url)
+            FacebookLoginMutation();
+        }
 
     }
     const responseFromGoogle = (response: any): any => {
@@ -157,7 +161,6 @@ const AuthHomePresenter: FC<IProps> = ({
                 <S.Bot>
                     <FacebookLogin
                         appId="306360554149080"
-                        autoLoad={true}
                         fields="name, email,picture"
                         callback={responseFromFacebook}
                     />

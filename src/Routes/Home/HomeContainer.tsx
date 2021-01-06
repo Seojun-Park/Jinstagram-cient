@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
+import { storage } from '../../Firebase'
 import useInput from '../../Hooks/useInput'
 import { ME } from '../../sharedquaries'
 import {
@@ -15,7 +16,10 @@ import { GET_FOLLOW_POST, SEARCH_USER } from './HomeQueries'
 
 
 const HomeContainer = () => {
-    const [me, setMe] = useState<any>()
+    const [me, setMe] = useState<any>();
+    const [flag, setFlag] = useState<boolean>(false);
+    const [imageURL, setImageURL] = useState<any>();
+    const [progress, setProgress] = useState(1);
     const [page, setPage] = useState<number>(1);
     const [term, termChange] = useInput("")
     const [posts, setPosts] = useState<any>();
@@ -64,6 +68,30 @@ const HomeContainer = () => {
             }
         }
     })
+
+    useEffect(() => {
+        if (flag && me) {
+            let uploadTask = storage
+                .ref(`/${me.username}/profilePhoto`)
+                .put(imageURL);
+            uploadTask.on(
+                "state_changed",
+                (snapshot) => {
+                    const percentUploaded = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+                    setProgress(percentUploaded)
+                },
+                (err) => { console.log(err) },
+                () => {
+                    storage.ref(`/${me.username}/`)
+                        .child('profilePhoto')
+                        .getDownloadURL()
+                        .then((url) => {
+                            setImageURL(url)
+                        })
+                }
+            )
+        }
+    }, [flag, me, setProgress, imageURL])
 
     if (loading || me === undefined) {
         return (<>Loading...</>)
