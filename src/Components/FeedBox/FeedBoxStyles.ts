@@ -11,7 +11,7 @@ export const Container = styled.div`
   border: 1px solid #e6e6e6;
   border-radius: 4px;
   background-color: white;
-  max-width: 600px;
+  width: 500px;
   user-select: none;
   margin-bottom: 25px;
   a {
@@ -42,13 +42,15 @@ export const Images = styled.div`
   flex-direction: column;
   align-items: stretch;
   flex-shrink: 0;
+
+  border: 1px solid black;
 `;
 
 export const Image = styled.div<IStyleProps>`
   max-width: 100%;
   width: 100%;
-  height: 600px;
   position: absolute;
+  height: 400px;
   top: 0;
   background-image: url(${(props) => props.url});
   background-size: cover;
