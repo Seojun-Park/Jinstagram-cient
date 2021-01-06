@@ -22,7 +22,7 @@ const HomeContainer = () => {
     const [flag, setFlag] = useState<boolean>(false);
     const [images, setImages] = useState<any>()
     const [caption, setCaption] = useInput("")
-    const [imageUrl, setImageUrl] = useState<string[]>();
+    const [imageUrl, setImageUrl] = useState<string[]>([]);
     const [progress, setProgress] = useState(1);
     const [page, setPage] = useState<number>(1);
     const [term, termChange] = useInput("")
@@ -78,7 +78,7 @@ const HomeContainer = () => {
         variables: {
             caption,
             location: "",
-            images: [""]
+            images: imageUrl
         }
     })
 
@@ -92,39 +92,32 @@ const HomeContainer = () => {
         }
     }
 
-
-    // useEffect(() => {
-    //     if (flag && me) {
-    //         let uploadTask = storage
-    //             .ref(`/${me.username}/images`)
-    //             .put(images);
-    //         uploadTask.on(
-    //             "state_changed",
-    //             (snapshot) => {
-    //                 const percentUploaded = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
-    //                 setProgress(percentUploaded)
-    //             },
-    //             (err) => { console.log(err) },
-    //             () => {
-    //                 storage.ref(`/${me.username}/`)
-    //                     .child('images')
-    //                     .getDownloadURL()
-    //                     .then((url) => {
-    //                         setImageUrl(url)
-    //                     })
-    //             }
-    //         )
-    //     }
-    // }, [flag, me, setProgress, images, setImageUrl])
-
     useEffect(() => {
         if (flag && me && images) {
             for (let i = 0; i < images.length; i++) {
-                console.log(images[i]);
+                let uploadTask = storage
+                    .ref(`/${me.username}/images/${images[i].name}`)
+                    .put(images[i]);
+                uploadTask.on(
+                    "state_changed",
+                    (snapshot) => {
+                        const percentUploaded = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+                        setProgress(percentUploaded)
+                    },
+                    (err) => { console.log(err) },
+                    () => {
+                        storage.ref(`/${me.username}/images/`)
+                            .child(`${images[i].name}`)
+                            .getDownloadURL()
+                            .then((url) => {
+                                console.log(url)
+                                setImageUrl(prev => [...prev, url])
+                            })
+                    }
+                )
             }
         }
     }, [flag, me, images])
-
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition((pos) =>
