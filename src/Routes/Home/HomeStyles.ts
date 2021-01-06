@@ -5,7 +5,7 @@ export const Wrapper = styled.div``;
 
 export const Container = styled.div`
   margin: 50px auto;
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,11 +14,12 @@ export const Container = styled.div`
 `;
 
 export const Post = styled.div`
-  width: 70%;
+  width: 100%;
   border: 1px solid #e6e6e6;
   padding: 15px;
   height: 120px;
   border-radius: 4px;
+  max-width: 470px;
 `;
 
 export const Textarea = styled(TextareaAutosize)`
