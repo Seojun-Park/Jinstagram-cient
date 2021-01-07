@@ -35,6 +35,7 @@ const HomeContainer = () => {
     const [searchedUser, setSearchedUser] = useState<any>()
     const [lat, setLat] = useState<number>(0)
     const [lng, setLng] = useState<number>(0)
+    const [location, setLocation] = useState<string>("")
 
     const { loading } = useQuery<Me>(ME, {
         onCompleted: ({ Me }) => {
@@ -84,7 +85,7 @@ const HomeContainer = () => {
     const [UploadPostMutation] = useMutation<UploadPost, UploadPostVariables>(UPLOAD_POST, {
         variables: {
             caption,
-            location: "",
+            location,
             images: imageUrl
         }
     })
@@ -135,12 +136,13 @@ const HomeContainer = () => {
         })
     }, [setLat, setLng])
 
+
     useEffect(() => {
         if (lat !== 0 && lng !== 0) {
-            getAddress(lat, lng);
+            getAddress(lat, lng, setLocation);
         }
-    }, [lat, lng])
-    console.log(lat, lng)
+    }, [lat, lng, setLocation])
+    console.log(location)
 
     if (loading || me === undefined) {
         return (<>Loading...</>)

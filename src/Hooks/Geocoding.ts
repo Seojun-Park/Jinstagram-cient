@@ -1,21 +1,21 @@
-import { Client } from "@googlemaps/google-maps-services-js";
+import React from "react";
+import axios from "axios";
 import { googleApi } from "../key";
 
-const client = new Client({});
-
-export const getAddress = (lat: number, lng: number) => {
-  client
-    .elevation({
-      params: {
-        locations: [{ lat, lng }],
-        key: googleApi.key
-      },
-      timeout: 1000
-    })
-    .then((r) => {
-      console.log(r.data.results[0].elevation);
-    })
-    .catch((e) => {
-      console.log(e.response.data.error_message);
-    });
+export const getAddress = async (
+  lat: number,
+  lng: number,
+  setLocation: React.Dispatch<React.SetStateAction<string>>
+) => {
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${googleApi.key}`;
+  try {
+    const response = await axios.get(url);
+    if (response) {
+      setLocation(response.data?.results[0].address_components[2].long_name);
+    } else {
+      console.log(" no response");
+    }
+  } catch (e) {
+    console.log(e);
+  }
 };
