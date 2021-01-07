@@ -52,3 +52,7 @@ export const Row = styled.div`
   align-items: center;
   padding-right: 15px;
 `;
+
+export const Button = styled.button`
+
+`

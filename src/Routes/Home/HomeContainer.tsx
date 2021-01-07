@@ -87,7 +87,7 @@ const HomeContainer = () => {
             caption,
             location,
             images: imageUrl
-        }
+        }, onCompleted: v => console.log(v, "mutation")
     })
 
     const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -142,7 +142,17 @@ const HomeContainer = () => {
             getAddress(lat, lng, setLocation);
         }
     }, [lat, lng, setLocation])
-    console.log(location)
+
+    const handlePost = async () => {
+        if (!imageUrl && caption === "") {
+            toast.error("You need to upload any photo and caption")
+        } else if (imageUrl && caption) {
+            console.log("came?")
+            await UploadPostMutation();
+        }
+    }
+
+    console.log(caption, location, imageUrl)
 
     if (loading || me === undefined) {
         return (<>Loading...</>)
@@ -160,6 +170,7 @@ const HomeContainer = () => {
                 caption={caption}
                 setCaption={setCaption}
                 UploadPostMutation={UploadPostMutation}
+                handlePost={handlePost}
             />
         )
     }

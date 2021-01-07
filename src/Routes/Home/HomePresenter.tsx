@@ -22,7 +22,7 @@ interface IProps {
     setCaption: (
         e: React.ChangeEvent<HTMLTextAreaElement>) => void
     UploadPostMutation: any
-
+    handlePost: any
 }
 
 const HomePresenter: React.FC<IProps> = ({
@@ -37,7 +37,8 @@ const HomePresenter: React.FC<IProps> = ({
     flag,
     caption,
     setCaption,
-    UploadPostMutation
+    UploadPostMutation,
+    handlePost
 }) => {
     const { getRootProps, getInputProps } = useDropzone({ accept: "image/png, image/jpeg" })
     return (
@@ -57,7 +58,7 @@ const HomePresenter: React.FC<IProps> = ({
                                 : <ImageUpload />
                             }
                         </S.UploadDiv>
-                        "upload button"
+                        <S.Button onClick={() => handlePost()}>Post</S.Button>
                     </S.Row>
                 </S.Post>
                 {me.following === null ? "you don't follow anyone" : "so on"}
