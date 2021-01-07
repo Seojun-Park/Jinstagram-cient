@@ -1,37 +1,5 @@
 import { gql } from "@apollo/client";
 
-export const GET_FOLLOW_POST = gql`
-  query GetFollowedPost($page: Int!) {
-    GetFollowedPost(page: $page) {
-      ok
-      err
-      post {
-        id
-        caption
-        location
-        user {
-          id
-          username
-        }
-        images {
-          url
-        }
-        comments {
-          id
-          text
-        }
-        isLiked
-        likes {
-          user {
-            id
-            username
-          }
-        }
-      }
-    }
-  }
-`;
-
 export const SEARCH_USER = gql`
   query SearchUser($term: String!) {
     SearchUser(term: $term) {
@@ -51,6 +19,24 @@ export const UPLOAD_POST = gql`
     UploadPost(location: $location, caption: $caption, images: $images) {
       ok
       err
+    }
+  }
+`;
+
+export const GET_FULL_POST = gql`
+  query GetFullPost($page: Int!) {
+    GetFullPost(page: $page) {
+      ok
+      err
+      post {
+        id
+        caption
+        location
+        images {
+          id
+          url
+        }
+      }
     }
   }
 `;

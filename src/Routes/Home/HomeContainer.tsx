@@ -5,8 +5,8 @@ import { storage } from '../../Firebase'
 import { getAddress } from '../../Hooks/Geocoding'
 import { ME } from '../../sharedquaries'
 import {
-    GetFollowedPost,
-    GetFollowedPostVariables,
+    GetFullPost,
+    GetFullPostVariables,
     Me,
     SearchUser,
     SearchUserVariables,
@@ -16,7 +16,7 @@ import {
 import HomePresenter from './HomePresenter'
 import useInput from '../../Hooks/useInput'
 import {
-    GET_FOLLOW_POST,
+    GET_FULL_POST,
     SEARCH_USER,
     UPLOAD_POST
 } from './HomeQueries'
@@ -48,23 +48,6 @@ const HomeContainer = () => {
         }
     })
 
-    useQuery<GetFollowedPost, GetFollowedPostVariables>(GET_FOLLOW_POST, {
-        variables: {
-            page
-        },
-        onCompleted: ({ GetFollowedPost }) => {
-            const { ok, err, post } = GetFollowedPost;
-            if (ok) {
-                if (post) {
-                    setPosts(post);
-                }
-            } else if (err) {
-                toast.error(err);
-            }
-        }
-    })
-
-
     useQuery<SearchUser, SearchUserVariables>(SEARCH_USER, {
         skip: term === "",
         variables: {
@@ -80,6 +63,13 @@ const HomeContainer = () => {
                 console.log(err)
             }
         }
+    })
+
+    useQuery<GetFullPost, GetFullPostVariables>(GET_FULL_POST, {
+        variables: {
+            page: 1
+        },
+        onCompleted: v => console.log(v)
     })
 
     const [UploadPostMutation] = useMutation<UploadPost, UploadPostVariables>(UPLOAD_POST, {
@@ -152,7 +142,6 @@ const HomeContainer = () => {
         }
     }
 
-    console.log(caption, location, imageUrl)
 
     if (loading || me === undefined) {
         return (<>Loading...</>)
