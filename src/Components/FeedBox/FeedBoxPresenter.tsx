@@ -4,20 +4,18 @@ import { Comment, HeartEmpty, HeartFull } from '../Icon'
 
 interface IProps {
     posts: any
-    handleSlide: any
     currentItem: number
     setCurrentItem: React.Dispatch<React.SetStateAction<number>>
 }
 
 const FeedBoxPresenter: React.FC<IProps> = ({
     posts,
-    handleSlide,
     currentItem,
     setCurrentItem
 }) => {
     // console.log(posts)
     const time = new Date(posts.createdAt * 1000)
-    console.log(time.getMonth())
+    console.log(time)
     return (
         <S.Container>
             <S.Header>
