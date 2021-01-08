@@ -6,16 +6,40 @@ interface IProps {
     posts: any
     currentItem: number
     setCurrentItem: React.Dispatch<React.SetStateAction<number>>
+    isLiked: boolean
+    setIsLiked: React.Dispatch<React.SetStateAction<boolean>>
+    handleToggleLike: any
+    likeCount: number
+    comment: string
+    commentChange: (
+        e: React.ChangeEvent<HTMLInputElement>) => void
+    commentS: any
+    me: any
 }
 
 const FeedBoxPresenter: React.FC<IProps> = ({
     posts,
     currentItem,
-    setCurrentItem
+    setCurrentItem,
+    isLiked,
+    setIsLiked,
+    handleToggleLike,
+    likeCount,
+    comment,
+    commentChange,
+    commentS,
+    me
 }) => {
-    // console.log(posts)
-    const time = new Date(posts.createdAt * 1000)
-    console.log(time)
+    let time = Math.floor(posts.createdAt / 1000)
+    time *= 1000
+    const date = new Date(time)
+    const year = date.getFullYear()
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    const hour = date.getHours()
+    const min = date.getMinutes()
+    console.log(posts)
+
     return (
         <S.Container>
             <S.Header>
@@ -35,12 +59,14 @@ const FeedBoxPresenter: React.FC<IProps> = ({
             </S.Images>
             <S.Meta>
                 <S.Buttons>
-                    <S.Button>{posts.isLiked ? <HeartFull /> : <HeartEmpty />}</S.Button>
+                    <S.Button onClick={handleToggleLike}>
+                        {isLiked ? <HeartFull /> : <HeartEmpty />}
+                    </S.Button>
                     <S.Button><Comment /></S.Button>
                 </S.Buttons>
-                {posts.likes && posts.likes.length === 1 ?
+                {likeCount === 1 ?
                     <span style={{ fontWeight: 600 }}>1 like</span> :
-                    <span style={{ fontWeight: 600 }}>{posts.likes.length} likes</span>
+                    <span style={{ fontWeight: 600 }}>{likeCount} likes</span>
                 }
                 <S.Caption>
                     <span style={{ fontWeight: 600 }}>{posts.user.username}</span> {posts.caption}
@@ -50,15 +76,18 @@ const FeedBoxPresenter: React.FC<IProps> = ({
                         {posts.comments.map((comment: any, index: number) => {
                             return (
                                 <S.Comment key={index}>
-                                    <span style={{ fontWeight: 600 }}>{comment.user.username}</span> {comment.text}
+                                    <span style={{ fontWeight: 600 }}>{comment.userId}</span> {comment.text}
                                 </S.Comment>
                             )
                         })}
+                        <span style={{ fontWeight: 600 }}>{me.username}</span> {commentS}
                     </S.Comments>
                 }
-                <S.Timestamp></S.Timestamp>
+                <S.Timestamp>{`${year}.${month}.${day} ${hour}:${min}`}</S.Timestamp>
                 <S.Textarea
                     placeholder="Add a comment..."
+                    value={comment}
+                    onChange={commentChange}
                 />
             </S.Meta>
         </S.Container>

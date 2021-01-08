@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import TextareaAutosize from "react-autosize-textarea";
 import { Link } from "react-router-dom";
 
 interface IStyleProps {
@@ -121,7 +120,7 @@ export const Timestamp = styled.span`
   border-bottom: 1px solid #003569;
 `;
 
-export const Textarea = styled(TextareaAutosize)`
+export const Textarea = styled.input`
   border: none;
   width: 100%;
   resize: none;

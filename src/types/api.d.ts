@@ -17,6 +17,53 @@ export interface isLoggedIn {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: ToggleLike
+// ====================================================
+
+export interface ToggleLike_ToggleLike {
+  __typename: "ToggleLikeResponse";
+  ok: boolean;
+  err: string | null;
+}
+
+export interface ToggleLike {
+  ToggleLike: ToggleLike_ToggleLike;
+}
+
+export interface ToggleLikeVariables {
+  postId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: AddComment
+// ====================================================
+
+export interface AddComment_AddComment {
+  __typename: "AddCommentResponse";
+  ok: boolean;
+  err: string | null;
+}
+
+export interface AddComment {
+  AddComment: AddComment_AddComment;
+}
+
+export interface AddCommentVariables {
+  text: string;
+  postId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: FacebookConnect
 // ====================================================
 
