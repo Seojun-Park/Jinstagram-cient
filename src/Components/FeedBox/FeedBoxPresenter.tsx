@@ -1,32 +1,47 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import * as S from './FeedBoxStyles'
+import { Comment, HeartEmpty, HeartFull } from '../Icon'
 
 interface IProps {
     posts: any
+    handleSlide: any
+    currentItem: number
+    setCurrentItem: React.Dispatch<React.SetStateAction<number>>
 }
 
-const FeedBoxPresenter: React.FC<IProps> = ({ posts }) => {
+const FeedBoxPresenter: React.FC<IProps> = ({
+    posts,
+    handleSlide,
+    currentItem,
+    setCurrentItem
+}) => {
+    console.log(posts)
     return (
         <S.Container>
             <S.Header>
-                image
+                <S.ProfileImage src={posts.user.profilePhoto} />
                 <S.UserCol>
-                    <Link to="/"><span style={{ fontWeight: 600 }}>username</span></Link>
-                    <S.Location>location</S.Location>
+                    <S.ExtendedLink to="/"><span style={{ fontWeight: 600 }}>{posts.user.username}</span></S.ExtendedLink>
+                    <S.Location>{posts.location}</S.Location>
                 </S.UserCol>
             </S.Header>
             <S.Images>
-                <S.Image url="/" showing={false}></S.Image>
+                {posts.images && posts.images.map((image: any, index: number) => {
+                    console.log(image)
+                    return (<S.Image url={image.url} showing={index === currentItem} key={index}></S.Image>)
+                })}
+                <S.Dots>{posts.images && posts.images.map((image: any, index: number) => {
+                    return (<S.Dot onClick={() => setCurrentItem(index)} current={index === currentItem} />)
+                })}</S.Dots>
             </S.Images>
             <S.Meta>
                 <S.Buttons>
-                    <S.Button>like</S.Button>
-                    <S.Button>Comment</S.Button>
+                    <S.Button>{posts.isLiked ? <HeartFull /> : <HeartEmpty />}</S.Button>
+                    <S.Button><Comment /></S.Button>
                 </S.Buttons>
                 <span style={{ fontWeight: 600 }}>like count</span>
                 <S.Caption>
-                    <span style={{ fontWeight: 600 }}>username</span> caption
+                    <span style={{ fontWeight: 600 }}>{posts.user.username}</span> {posts.caption}
                 </S.Caption>
                 <S.Comments>
                     <S.Comment>

@@ -63,7 +63,8 @@ const HomePresenter: React.FC<IProps> = ({
                 </S.Post>
                 {me.following === null ? "you don't follow anyone" : "so on"}
                 {/* map method will be done on here */}
-                <FeedBox posts={posts} />
+                {posts && posts.map((post: any, index: number) => <FeedBox key={index} posts={post} />
+                )}
             </S.Container>
         </S.Wrapper >
     )

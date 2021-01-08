@@ -207,10 +207,31 @@ export interface UploadPostVariables {
 // GraphQL query operation: GetFullPost
 // ====================================================
 
+export interface GetFullPost_GetFullPost_post_user {
+  __typename: "User";
+  id: number;
+  username: string;
+  profilePhoto: string | null;
+}
+
 export interface GetFullPost_GetFullPost_post_images {
   __typename: "Image";
   id: number;
   url: string;
+}
+
+export interface GetFullPost_GetFullPost_post_comments {
+  __typename: "Comment";
+  id: number;
+  text: string;
+  userId: number | null;
+  createdAt: string | null;
+}
+
+export interface GetFullPost_GetFullPost_post_likes {
+  __typename: "Like";
+  id: number;
+  userId: number | null;
 }
 
 export interface GetFullPost_GetFullPost_post {
@@ -218,7 +239,11 @@ export interface GetFullPost_GetFullPost_post {
   id: number;
   caption: string | null;
   location: string | null;
+  isLiked: boolean | null;
+  user: GetFullPost_GetFullPost_post_user;
   images: (GetFullPost_GetFullPost_post_images | null)[] | null;
+  comments: (GetFullPost_GetFullPost_post_comments | null)[] | null;
+  likes: (GetFullPost_GetFullPost_post_likes | null)[] | null;
 }
 
 export interface GetFullPost_GetFullPost {

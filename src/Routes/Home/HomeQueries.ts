@@ -32,9 +32,25 @@ export const GET_FULL_POST = gql`
         id
         caption
         location
+        isLiked
+        user {
+          id
+          username
+          profilePhoto
+        }
         images {
           id
           url
+        }
+        comments {
+          id
+          text
+          userId
+          createdAt
+        }
+        likes {
+          id
+          userId
         }
       }
     }

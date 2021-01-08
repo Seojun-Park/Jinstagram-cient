@@ -69,7 +69,14 @@ const HomeContainer = () => {
         variables: {
             page: 1
         },
-        onCompleted: v => console.log(v)
+        onCompleted: ({ GetFullPost }) => {
+            const { ok, err, post } = GetFullPost;
+            if (ok && post) {
+                setPosts(post)
+            } else {
+                console.log(err)
+            }
+        }
     })
 
     const [UploadPostMutation] = useMutation<UploadPost, UploadPostVariables>(UPLOAD_POST, {
