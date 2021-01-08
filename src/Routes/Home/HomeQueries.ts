@@ -52,6 +52,7 @@ export const GET_FULL_POST = gql`
           id
           userId
         }
+        createdAt
       }
     }
   }

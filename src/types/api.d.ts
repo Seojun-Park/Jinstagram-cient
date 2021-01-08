@@ -244,6 +244,7 @@ export interface GetFullPost_GetFullPost_post {
   images: (GetFullPost_GetFullPost_post_images | null)[] | null;
   comments: (GetFullPost_GetFullPost_post_comments | null)[] | null;
   likes: (GetFullPost_GetFullPost_post_likes | null)[] | null;
+  createdAt: string | null;
 }
 
 export interface GetFullPost_GetFullPost {

@@ -133,6 +133,7 @@ export const Textarea = styled(TextareaAutosize)`
 
 export const Comments = styled.ul`
   margin-top: 10px;
+  list-style: none;
 `;
 
 export const Comment = styled.li`
