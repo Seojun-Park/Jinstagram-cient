@@ -375,6 +375,39 @@ export interface Me {
 // @generated
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL query operation: SeeUser
+// ====================================================
+
+export interface SeeUser_SeeUser_user {
+  __typename: "User";
+  id: number;
+  username: string;
+  firstName: string;
+  lastName: string;
+  intro: string | null;
+}
+
+export interface SeeUser_SeeUser {
+  __typename: "SeeUserResponse";
+  ok: boolean;
+  err: string | null;
+  user: SeeUser_SeeUser_user | null;
+}
+
+export interface SeeUser {
+  SeeUser: SeeUser_SeeUser;
+}
+
+export interface SeeUserVariables {
+  userId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================

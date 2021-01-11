@@ -38,3 +38,19 @@ export const ME = gql`
     }
   }
 `;
+
+export const SEE_USER = gql`
+  query SeeUser($userId: Int!) {
+    SeeUser(userId: $userId) {
+      ok
+      err
+      user {
+        id
+        username
+        firstName
+        lastName
+        intro
+      }
+    }
+  }
+`;

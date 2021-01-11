@@ -66,6 +66,7 @@ const HomeContainer = () => {
     })
 
     useQuery<GetFullPost, GetFullPostVariables>(GET_FULL_POST, {
+        fetchPolicy: "network-only",
         variables: {
             page: 1
         },

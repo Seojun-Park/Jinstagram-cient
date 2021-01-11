@@ -5,6 +5,7 @@ import useInput from '../../Hooks/useInput'
 import FeedBoxPresenter from './FeedBoxPresenter'
 import { ADD_COMMENT, TOGGLE_LIKE } from './FeedBoxQueries'
 import { ME } from '../../sharedquaries'
+import { GET_FULL_POST } from '../../Routes/Home/HomeQueries'
 
 interface IProps {
     posts: any
@@ -38,7 +39,7 @@ const FeedBoxContainer: React.FC<IProps> = ({ posts }) => {
         onCompleted: ({ Me }) => {
             const { ok, err, user } = Me
             if (ok && user) {
-                setMe(Me)
+                setMe(Me.user)
             } else {
                 console.log(err)
             }
@@ -60,7 +61,8 @@ const FeedBoxContainer: React.FC<IProps> = ({ posts }) => {
             } else {
                 console.log(err)
             }
-        }
+        },
+        refetchQueries: [{ query: GET_FULL_POST, variables: { page: 1 } }]
     })
 
     const handleToggleLike = async (e: React.MouseEvent) => {
@@ -77,11 +79,14 @@ const FeedBoxContainer: React.FC<IProps> = ({ posts }) => {
     }, [AddCommentMutation])
 
     useEffect(() => {
-        document.addEventListener("keydown", handleUserKeyPress)
-        return () => {
-            document.removeEventListener('keydown', handleUserKeyPress)
+        if (comment !== "") {
+
+            document.addEventListener("keydown", handleUserKeyPress)
+            return () => {
+                document.removeEventListener('keydown', handleUserKeyPress)
+            }
         }
-    }, [handleUserKeyPress])
+    }, [comment, handleUserKeyPress])
 
 
     if (loading || !me) {

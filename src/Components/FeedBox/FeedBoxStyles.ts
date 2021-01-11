@@ -145,3 +145,7 @@ export const Comment = styled.li`
 export const Caption = styled.div`
   margin: 10px 0px;
 `;
+
+export const CommentLink = styled(Link)`
+text-decoration:none;
+`

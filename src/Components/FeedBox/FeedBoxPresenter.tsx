@@ -38,7 +38,6 @@ const FeedBoxPresenter: React.FC<IProps> = ({
     const day = date.getDate()
     const hour = date.getHours()
     const min = date.getMinutes()
-    console.log(posts)
 
     return (
         <S.Container>
@@ -69,18 +68,25 @@ const FeedBoxPresenter: React.FC<IProps> = ({
                     <span style={{ fontWeight: 600 }}>{likeCount} likes</span>
                 }
                 <S.Caption>
-                    <span style={{ fontWeight: 600 }}>{posts.user.username}</span> {posts.caption}
+                    <S.CommentLink to="/" style={{ fontWeight: 600 }}>{posts.user.username}</S.CommentLink > {posts.caption}
                 </S.Caption>
                 {posts.comments &&
                     <S.Comments>
                         {posts.comments.map((comment: any, index: number) => {
                             return (
                                 <S.Comment key={index}>
-                                    <span style={{ fontWeight: 600 }}>{comment.userId}</span> {comment.text}
+                                    <S.CommentLink to="/" style={{ fontWeight: 600 }}>{comment.userId}</S.CommentLink> {comment.text}
                                 </S.Comment>
                             )
                         })}
-                        <span style={{ fontWeight: 600 }}>{me.username}</span> {commentS}
+                        {commentS && commentS.length !== 0 && commentS.map((com: any, index: number) => {
+                            return (
+                                <S.Comment key={index}>
+                                    <S.CommentLink to="/" style={{ fontWeight: 600 }}>{me.username}</S.CommentLink> {com}
+                                </S.Comment>
+                            )
+                        }
+                        )}
                     </S.Comments>
                 }
                 <S.Timestamp>{`${year}.${month}.${day} ${hour}:${min}`}</S.Timestamp>
