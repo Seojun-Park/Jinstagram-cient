@@ -44,7 +44,10 @@ const FeedBoxPresenter: React.FC<IProps> = ({
             <S.Header>
                 <S.ProfileImage src={posts.user.profilePhoto} />
                 <S.UserCol>
-                    <S.ExtendedLink to="/"><span style={{ fontWeight: 600 }}>{posts.user.username}</span></S.ExtendedLink>
+                    <S.ExtendedLink to={{
+                        pathname: '/profile',
+                        state: { id: posts.user.id }
+                    }}><span style={{ fontWeight: 600 }}>{posts.user.username}</span></S.ExtendedLink>
                     <S.Location>{posts.location}</S.Location>
                 </S.UserCol>
             </S.Header>
@@ -68,21 +71,25 @@ const FeedBoxPresenter: React.FC<IProps> = ({
                     <span style={{ fontWeight: 600 }}>{likeCount} likes</span>
                 }
                 <S.Caption>
-                    <S.CommentLink to="/" style={{ fontWeight: 600 }}>{posts.user.username}</S.CommentLink > {posts.caption}
+                    <S.CommentLink to={`/profile/${posts.user.username}`} style={{ fontWeight: 600 }}>{posts.user.username}</S.CommentLink > {posts.caption}
                 </S.Caption>
                 {posts.comments &&
                     <S.Comments>
                         {posts.comments.map((comment: any, index: number) => {
                             return (
                                 <S.Comment key={index}>
-                                    <S.CommentLink to="/" style={{ fontWeight: 600 }}>{comment.userId}</S.CommentLink> {comment.text}
+                                    {/* <S.CommentLink to={`/profile/${comment.user.username}`} style={{ fontWeight: 600 }}>{comment.userId}</S.CommentLink> {comment.text} */}
+                                    <S.CommentLink to={{
+                                        pathname: "/profile",
+                                        state: { id: comment.userId }
+                                    }} style={{ fontWeight: 600 }}>{comment.userId}</S.CommentLink> {comment.text}
                                 </S.Comment>
                             )
                         })}
                         {commentS && commentS.length !== 0 && commentS.map((com: any, index: number) => {
                             return (
                                 <S.Comment key={index}>
-                                    <S.CommentLink to="/" style={{ fontWeight: 600 }}>{me.username}</S.CommentLink> {com}
+                                    <S.CommentLink to={`/profile/${me.username}`} style={{ fontWeight: 600 }}>{me.username}</S.CommentLink> {com}
                                 </S.Comment>
                             )
                         }

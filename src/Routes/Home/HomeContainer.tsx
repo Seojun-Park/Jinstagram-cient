@@ -21,8 +21,9 @@ import {
     UPLOAD_POST
 } from './HomeQueries'
 
+interface IProps { }
 
-const HomeContainer = () => {
+const HomeContainer: React.FC<IProps> = () => {
     const [me, setMe] = useState<any>();
     const [flag, setFlag] = useState<boolean>(false);
     const [images, setImages] = useState<any>()

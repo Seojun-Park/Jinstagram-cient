@@ -40,16 +40,45 @@ export const ME = gql`
 `;
 
 export const SEE_USER = gql`
-  query SeeUser($userId: Int!) {
-    SeeUser(userId: $userId) {
+  query SeeUser($username: String!) {
+    SeeUser(username: $username) {
       ok
       err
       user {
         id
-        username
+        email
+        profilePhoto
         firstName
         lastName
+        username
         intro
+        following {
+          id
+          email
+          profilePhoto
+          firstName
+          lastName
+          username
+          intro
+        }
+        follower {
+          id
+          email
+          profilePhoto
+          firstName
+          lastName
+          username
+          intro
+        }
+        posts {
+          id
+        }
+        comments {
+          id
+        }
+        likes {
+          id
+        }
       }
     }
   }

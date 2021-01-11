@@ -379,13 +379,57 @@ export interface Me {
 // GraphQL query operation: SeeUser
 // ====================================================
 
+export interface SeeUser_SeeUser_user_following {
+  __typename: "User";
+  id: number;
+  email: string;
+  profilePhoto: string | null;
+  firstName: string;
+  lastName: string;
+  username: string;
+  intro: string | null;
+}
+
+export interface SeeUser_SeeUser_user_follower {
+  __typename: "User";
+  id: number;
+  email: string;
+  profilePhoto: string | null;
+  firstName: string;
+  lastName: string;
+  username: string;
+  intro: string | null;
+}
+
+export interface SeeUser_SeeUser_user_posts {
+  __typename: "Post";
+  id: number;
+}
+
+export interface SeeUser_SeeUser_user_comments {
+  __typename: "Comment";
+  id: number;
+}
+
+export interface SeeUser_SeeUser_user_likes {
+  __typename: "Like";
+  id: number;
+}
+
 export interface SeeUser_SeeUser_user {
   __typename: "User";
   id: number;
-  username: string;
+  email: string;
+  profilePhoto: string | null;
   firstName: string;
   lastName: string;
+  username: string;
   intro: string | null;
+  following: (SeeUser_SeeUser_user_following | null)[] | null;
+  follower: (SeeUser_SeeUser_user_follower | null)[] | null;
+  posts: (SeeUser_SeeUser_user_posts | null)[] | null;
+  comments: (SeeUser_SeeUser_user_comments | null)[] | null;
+  likes: (SeeUser_SeeUser_user_likes | null)[] | null;
 }
 
 export interface SeeUser_SeeUser {
@@ -400,7 +444,7 @@ export interface SeeUser {
 }
 
 export interface SeeUserVariables {
-  userId: number;
+  username: string;
 }
 
 /* tslint:disable */
