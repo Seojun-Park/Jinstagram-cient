@@ -16,7 +16,7 @@ const FeedBoxContainer: React.FC<IProps> = ({ posts }) => {
     const [isLiked, setIsLiked] = useState<boolean>(posts.isLiked)
     const [likeCount, setLikeCount] = useState<number>(posts.likes.length)
     const [commentS, setCommentS] = useState<any>([])
-    const [comment, commentChange] = useInput("")
+    const [comment, commentChange, setComment] = useInput("")
     const [me, setMe] = useState<any>();
     const [ToggleLikeMutation] = useMutation<ToggleLike,
         ToggleLikeVariables>(TOGGLE_LIKE, {
@@ -58,6 +58,7 @@ const FeedBoxContainer: React.FC<IProps> = ({ posts }) => {
             const { ok, err } = AddComment;
             if (ok) {
                 setCommentS([...commentS, comment])
+                setComment("")
             } else {
                 console.log(err)
             }

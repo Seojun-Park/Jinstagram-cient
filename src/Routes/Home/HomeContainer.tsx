@@ -86,7 +86,15 @@ const HomeContainer: React.FC<IProps> = () => {
             caption,
             location,
             images: imageUrl
-        }, onCompleted: v => console.log(v, "mutation")
+        }, refetchQueries: [{ query: GET_FULL_POST, variables: { page: 1 } }],
+        onCompleted: ({ UploadPost }) => {
+            const { ok, err } = UploadPost;
+            if (ok) {
+                window.location.reload();
+            } else {
+                console.log(err);
+            }
+        }
     })
 
     const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
