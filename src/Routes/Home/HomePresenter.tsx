@@ -1,6 +1,7 @@
 
 import React from 'react'
 import Header from '../../Components/Header'
+import Loader from '../../Components/Loader'
 import FeedBox from '../../Components/FeedBox'
 import { useDropzone } from 'react-dropzone'
 import { ImageUpload } from '../../Components/Icon'
@@ -54,11 +55,13 @@ const HomePresenter: React.FC<IProps> = ({
                     <S.Row>
                         <S.UploadDiv {...getRootProps()}>
                             <input {...getInputProps()} onChange={handleUpload} />
-                            {flag ? (progress !== 100 ? "loading" : "preview?")
+                            {flag ? (progress !== 100 ? <Loader /> : "")
                                 : <ImageUpload />
                             }
                         </S.UploadDiv>
-                        <S.Button onClick={() => handlePost()}>Post</S.Button>
+                        {flag ? (progress !== 100 ? <Loader /> :
+                            <S.Button onClick={() => handlePost()}>Upload</S.Button>) :
+                            <S.Button onClick={() => handlePost()}>Upload</S.Button>}
                     </S.Row>
                 </S.Post>
                 {me.following === null ? "you don't follow anyone" : "so on"}

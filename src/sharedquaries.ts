@@ -51,6 +51,7 @@ export const SEE_USER = gql`
         firstName
         lastName
         username
+        isFollowing
         intro
         following {
           id
@@ -72,6 +73,11 @@ export const SEE_USER = gql`
         }
         posts {
           id
+          caption
+          location
+          images {
+            url
+          }
         }
         comments {
           id
@@ -79,6 +85,20 @@ export const SEE_USER = gql`
         likes {
           id
         }
+      }
+    }
+  }
+`;
+
+export const SEARCH_USER = gql`
+  query SearchUser($term: String!) {
+    SearchUser(term: $term) {
+      ok
+      err
+      users {
+        id
+        username
+        profilePhoto
       }
     }
   }

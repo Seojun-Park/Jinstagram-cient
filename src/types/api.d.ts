@@ -195,37 +195,6 @@ export interface ConfirmSecretVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: SearchUser
-// ====================================================
-
-export interface SearchUser_SearchUser_users {
-  __typename: "User";
-  id: number;
-  username: string;
-  profilePhoto: string | null;
-}
-
-export interface SearchUser_SearchUser {
-  __typename: "SearchUserResponse";
-  ok: boolean;
-  err: string | null;
-  users: (SearchUser_SearchUser_users | null)[] | null;
-}
-
-export interface SearchUser {
-  SearchUser: SearchUser_SearchUser;
-}
-
-export interface SearchUserVariables {
-  term: string;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL mutation operation: UploadPost
 // ====================================================
 
@@ -321,6 +290,29 @@ export interface GetFullPostVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: ToggleFollowing
+// ====================================================
+
+export interface ToggleFollowing_ToggleFollowing {
+  __typename: "ToggleFollowingResponse";
+  ok: boolean;
+  err: string | null;
+}
+
+export interface ToggleFollowing {
+  ToggleFollowing: ToggleFollowing_ToggleFollowing;
+}
+
+export interface ToggleFollowingVariables {
+  username: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: Me
 // ====================================================
 
@@ -407,9 +399,17 @@ export interface SeeUser_SeeUser_user_follower {
   intro: string | null;
 }
 
+export interface SeeUser_SeeUser_user_posts_images {
+  __typename: "Image";
+  url: string;
+}
+
 export interface SeeUser_SeeUser_user_posts {
   __typename: "Post";
   id: number;
+  caption: string | null;
+  location: string | null;
+  images: (SeeUser_SeeUser_user_posts_images | null)[] | null;
 }
 
 export interface SeeUser_SeeUser_user_comments {
@@ -430,6 +430,7 @@ export interface SeeUser_SeeUser_user {
   firstName: string;
   lastName: string;
   username: string;
+  isFollowing: boolean | null;
   intro: string | null;
   following: (SeeUser_SeeUser_user_following | null)[] | null;
   follower: (SeeUser_SeeUser_user_follower | null)[] | null;
@@ -451,6 +452,37 @@ export interface SeeUser {
 
 export interface SeeUserVariables {
   username: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: SearchUser
+// ====================================================
+
+export interface SearchUser_SearchUser_users {
+  __typename: "User";
+  id: number;
+  username: string;
+  profilePhoto: string | null;
+}
+
+export interface SearchUser_SearchUser {
+  __typename: "SearchUserResponse";
+  ok: boolean;
+  err: string | null;
+  users: (SearchUser_SearchUser_users | null)[] | null;
+}
+
+export interface SearchUser {
+  SearchUser: SearchUser_SearchUser;
+}
+
+export interface SearchUserVariables {
+  term: string;
 }
 
 /* tslint:disable */

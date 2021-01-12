@@ -1,7 +1,9 @@
 import { useQuery } from '@apollo/client';
 import React, { useState } from 'react'
-import { ME } from '../../sharedquaries';
-import { Me } from '../../types/api';
+import { ME, SEARCH_USER } from '../../sharedquaries';
+import { Me, SearchUser, SearchUserVariables } from '../../types/api';
+import { Link } from 'react-router-dom'
+import { Logo } from '../Icon'
 import * as S from './HeaderStyles'
 
 interface IProps {
@@ -13,6 +15,7 @@ interface IProps {
 
 const HeaderPresenter: React.FC<IProps> = ({ url, term, termChange }) => {
     const [me, setMe] = useState<any>();
+    const [searchedUser, setSearchedUser] = useState<any>([]);
     const { loading } = useQuery<Me>(ME, {
         onCompleted: ({ Me }) => {
             const { ok, err, user } = Me;
@@ -23,6 +26,23 @@ const HeaderPresenter: React.FC<IProps> = ({ url, term, termChange }) => {
             }
         }
     })
+    useQuery<SearchUser, SearchUserVariables>(SEARCH_USER, {
+        skip: term === "",
+        variables: {
+            term
+        },
+        onCompleted: ({ SearchUser }) => {
+            const { ok, err, users } = SearchUser;
+            if (ok && users) {
+                setSearchedUser(users)
+            }
+            else {
+                console.log(err)
+            }
+        }
+    })
+
+
     if (loading || !me) {
         return (
             <>
@@ -32,7 +52,9 @@ const HeaderPresenter: React.FC<IProps> = ({ url, term, termChange }) => {
     }
     return (
         <S.Container>
-            <S.Col></S.Col>
+            <S.Col>
+                <Link to="/"><Logo /></Link>
+            </S.Col>
             <S.Col>
                 <S.Search
                     type="text"

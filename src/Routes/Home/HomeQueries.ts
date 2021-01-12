@@ -1,19 +1,5 @@
 import { gql } from "@apollo/client";
 
-export const SEARCH_USER = gql`
-  query SearchUser($term: String!) {
-    SearchUser(term: $term) {
-      ok
-      err
-      users {
-        id
-        username
-        profilePhoto
-      }
-    }
-  }
-`;
-
 export const UPLOAD_POST = gql`
   mutation UploadPost($location: String, $caption: String, $images: [String]) {
     UploadPost(location: $location, caption: $caption, images: $images) {

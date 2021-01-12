@@ -8,8 +8,6 @@ import {
     GetFullPost,
     GetFullPostVariables,
     Me,
-    SearchUser,
-    SearchUserVariables,
     UploadPost,
     UploadPostVariables
 } from '../../types/api'
@@ -17,7 +15,6 @@ import HomePresenter from './HomePresenter'
 import useInput from '../../Hooks/useInput'
 import {
     GET_FULL_POST,
-    SEARCH_USER,
     UPLOAD_POST
 } from './HomeQueries'
 
@@ -33,7 +30,6 @@ const HomeContainer: React.FC<IProps> = () => {
     const [page, setPage] = useState<number>(1);
     const [term, termChange] = useInput("")
     const [posts, setPosts] = useState<any>();
-    const [searchedUser, setSearchedUser] = useState<any>()
     const [lat, setLat] = useState<number>(0)
     const [lng, setLng] = useState<number>(0)
     const [location, setLocation] = useState<string>("")
@@ -48,28 +44,10 @@ const HomeContainer: React.FC<IProps> = () => {
             }
         }
     })
-
-    useQuery<SearchUser, SearchUserVariables>(SEARCH_USER, {
-        skip: term === "",
-        variables: {
-            term
-        },
-        onCompleted: ({ SearchUser }) => {
-            const { ok, err, users } = SearchUser;
-            if (ok) {
-                if (users) {
-                    setSearchedUser(users);
-                }
-            } else {
-                console.log(err)
-            }
-        }
-    })
-
     useQuery<GetFullPost, GetFullPostVariables>(GET_FULL_POST, {
         fetchPolicy: "network-only",
         variables: {
-            page: 1
+            page
         },
         onCompleted: ({ GetFullPost }) => {
             const { ok, err, post } = GetFullPost;
@@ -154,7 +132,7 @@ const HomeContainer: React.FC<IProps> = () => {
         if (!imageUrl && caption === "") {
             toast.error("You need to upload any photo and caption")
         } else if (imageUrl && caption) {
-            console.log("came?")
+
             await UploadPostMutation();
         }
     }

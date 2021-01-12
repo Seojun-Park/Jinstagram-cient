@@ -54,5 +54,11 @@ export const Row = styled.div`
 `;
 
 export const Button = styled.button`
-
-`
+  width: 60px;
+  padding: 10px 0;
+  border-radius: 4px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+`;
