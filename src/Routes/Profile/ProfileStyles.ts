@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-interface IButtonProps {
-  color?: string;
+interface IProps {
+  bg?: string;
 }
 
 export const Wrapper = styled.div``;
@@ -15,8 +15,6 @@ export const Container = styled.div`
   margin: 0 auto;
   min-height: 50vh;
   padding-top: 100px;
-
-  border: 1px solid black;
 `;
 
 export const UserDetail = styled.div`
@@ -41,6 +39,10 @@ export const UserDetailCol = styled.div`
 
 export const UserDetailRow = styled.div`
   margin-bottom: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 180px;
 `;
 
 export const Intro = styled.p`
@@ -58,8 +60,8 @@ export const Username = styled.span`
   font-size: 24px;
 `;
 
-export const FollowingButton = styled.button<IButtonProps>`
-  width: 150px;
+export const FollowingButton = styled.button`
+  width: 180px;
   padding: 10px 0;
   border-radius: 4px;
   border: none;
@@ -69,6 +71,41 @@ export const FollowingButton = styled.button<IButtonProps>`
 `;
 
 export const UserPosts = styled.div`
-  width: 90%;
-  border: 1px solid red;
+  width: 80%;
+  border-top: 3px solid #333;
+  padding-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(3, 250px);
+  grid-template-rows: 250px;
+  grid-auto-rows: 250px;
+  justify-content: center;
+  margin-bottom: 50px;
+`;
+
+export const PostOverlay = styled.div`
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s linear;
+  svg {
+    fill: white;
+  }
+`;
+
+export const PostContainer = styled.div<IProps>`
+  background-image: url(${(props) => props.bg});
+  background-size: cover;
+  margin: 3px;
+  height: 250px;
+  width: 250px;
+  cursor: pointer;
+  &:hover {
+    ${PostOverlay} {
+      opacity: 1;
+    }
+  }
 `;

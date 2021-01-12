@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useCallback } from 'react'
 import Header from '../../Components/Header'
 import Loader from '../../Components/Loader'
 import FeedBox from '../../Components/FeedBox'
@@ -41,6 +41,7 @@ const HomePresenter: React.FC<IProps> = ({
     UploadPostMutation,
     handlePost
 }) => {
+
     const { getRootProps, getInputProps } = useDropzone({ accept: "image/png, image/jpeg" })
     return (
         <S.Wrapper>

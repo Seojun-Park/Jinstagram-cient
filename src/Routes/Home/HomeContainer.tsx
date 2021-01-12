@@ -103,7 +103,6 @@ const HomeContainer: React.FC<IProps> = () => {
                             .child(`${images[i].name}`)
                             .getDownloadURL()
                             .then((url) => {
-                                console.log(url)
                                 setImageUrl(prev => [...prev, url])
                             })
                     }
@@ -132,7 +131,6 @@ const HomeContainer: React.FC<IProps> = () => {
         if (!imageUrl && caption === "") {
             toast.error("You need to upload any photo and caption")
         } else if (imageUrl && caption) {
-
             await UploadPostMutation();
         }
     }

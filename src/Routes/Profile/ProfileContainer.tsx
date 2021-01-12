@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@apollo/client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import useInput from '../../Hooks/useInput'
 import { ME, SEE_USER } from '../../sharedquaries'
@@ -16,10 +16,12 @@ interface IProps extends RouteComponentProps<IRouteParam> {
 
 const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
     const { username } = params;
+    const [isMe, setIsMe] = useState<boolean>(false)
     const [term, termChange] = useInput("")
     const [me, setMe] = useState<any>()
     const [user, setUser] = useState<any>()
     const [followingS, setFollowingS] = useState<boolean | null | undefined>();
+    const [popup, setPopup] = useState<boolean>(false)
     useQuery<Me>(ME, {
         onCompleted: ({ Me }) => {
             const { ok, err, user } = Me;
@@ -65,6 +67,16 @@ const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
         })
     }
 
+    useEffect(() => {
+        if (me && user) {
+            if (me.id === user.id) {
+                setIsMe(true);
+            } else {
+                setIsMe(false);
+            }
+        }
+    }, [me, user, setIsMe])
+
     if (loading || !user || !me) {
         return (
             <>
@@ -72,6 +84,7 @@ const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
             </>
         )
     }
+
     return (
         <ProfilePresenter
             me={me}
@@ -80,6 +93,9 @@ const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
             termChange={termChange}
             FollowingHandler={FollowingHandler}
             followingS={followingS}
+            isMe={isMe}
+            popup={popup}
+            setPopup={setPopup}
         />
     )
 }

@@ -64,6 +64,33 @@ export interface AddCommentVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: EditUser
+// ====================================================
+
+export interface EditUser_EditUser {
+  __typename: "EditUserResponse";
+  ok: boolean;
+  err: string | null;
+}
+
+export interface EditUser {
+  EditUser: EditUser_EditUser;
+}
+
+export interface EditUserVariables {
+  profilePhoto?: string | null;
+  intro?: string | null;
+  username?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: FacebookConnect
 // ====================================================
 
