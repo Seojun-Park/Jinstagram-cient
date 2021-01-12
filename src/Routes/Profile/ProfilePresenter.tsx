@@ -43,7 +43,13 @@ const ProfilePresenter: React.FC<IProps> = ({
                     </S.Row>
                 </S.UserDetail>
                 <S.UserPosts>
-                    posts
+                    {user.posts && user.posts.map((post: any, index: number) => {
+                        return (
+                            <div key={index}>
+                                {index}
+                            </div>
+                        )
+                    })}
                 </S.UserPosts>
             </S.Container>
         </S.Wrapper>

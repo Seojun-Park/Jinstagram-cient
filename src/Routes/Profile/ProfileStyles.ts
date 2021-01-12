@@ -7,7 +7,7 @@ interface IButtonProps {
 export const Wrapper = styled.div``;
 
 export const Container = styled.div`
-  width: 80%;
+  width: 100%;
   min-width: 500px;
   display: flex;
   align-items: center;
@@ -24,7 +24,6 @@ export const UserDetail = styled.div`
   min-width: 450px;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
   padding-left: 25px;
   padding-right: 25px;
   min-height: 200px;
@@ -69,4 +68,7 @@ export const FollowingButton = styled.button<IButtonProps>`
   cursor: pointer;
 `;
 
-export const UserPosts = styled.div``;
+export const UserPosts = styled.div`
+  width: 90%;
+  border: 1px solid red;
+`;
