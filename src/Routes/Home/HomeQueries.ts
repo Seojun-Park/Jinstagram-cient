@@ -45,7 +45,10 @@ export const GET_FULL_POST = gql`
         comments {
           id
           text
-          userId
+          user {
+            id
+            username
+          }
           createdAt
         }
         likes {

@@ -79,10 +79,7 @@ const FeedBoxPresenter: React.FC<IProps> = ({
                             return (
                                 <S.Comment key={index}>
                                     {/* <S.CommentLink to={`/profile/${comment.user.username}`} style={{ fontWeight: 600 }}>{comment.userId}</S.CommentLink> {comment.text} */}
-                                    <S.CommentLink to={{
-                                        pathname: "/profile",
-                                        state: { id: comment.userId }
-                                    }} style={{ fontWeight: 600 }}>{comment.userId}</S.CommentLink> {comment.text}
+                                    <S.CommentLink to={`/profile/${comment.user.username}`} style={{ fontWeight: 600 }}>{comment.user.username}</S.CommentLink> {comment.text}
                                 </S.Comment>
                             )
                         })}

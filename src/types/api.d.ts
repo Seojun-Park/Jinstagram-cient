@@ -267,11 +267,17 @@ export interface GetFullPost_GetFullPost_post_images {
   url: string;
 }
 
+export interface GetFullPost_GetFullPost_post_comments_user {
+  __typename: "User";
+  id: number;
+  username: string;
+}
+
 export interface GetFullPost_GetFullPost_post_comments {
   __typename: "Comment";
   id: number;
   text: string;
-  userId: number | null;
+  user: GetFullPost_GetFullPost_post_comments_user;
   createdAt: string | null;
 }
 

@@ -12,6 +12,7 @@ interface IProps {
 }
 
 const FeedBoxContainer: React.FC<IProps> = ({ posts }) => {
+    console.log(posts)
     const [currentItem, setCurrentItem] = useState<number>(0)
     const [isLiked, setIsLiked] = useState<boolean>(posts.isLiked)
     const [likeCount, setLikeCount] = useState<number>(posts.likes.length)

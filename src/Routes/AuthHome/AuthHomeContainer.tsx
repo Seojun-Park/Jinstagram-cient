@@ -147,7 +147,6 @@ const AuthHomeContainer = () => {
                     if (!data?.CreateAccount) {
                         toast.error("Can't create an account")
                     } else {
-                        toast.success("Account Created! Log in now")
                         setTimeout(() => setAction("login"))
                     }
                 } catch (err) {
