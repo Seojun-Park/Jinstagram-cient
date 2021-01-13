@@ -35,6 +35,7 @@ export const ExtendedLink = styled(Link)`
 
 export const ProfileImage = styled.img`
   width: 50px;
+  height: 50px;
   object-fit: cover;
   border-radius: 10rem;
 `;

@@ -1,9 +1,14 @@
+import { useMutation } from '@apollo/client';
 import React, { useCallback, useEffect, useState } from 'react';
+import { EditUser, EditUserVariables } from '../../types/api'
 import { useDropzone } from 'react-dropzone';
 import { storage } from '../../Firebase';
 import useInput from '../../Hooks/useInput';
 import { ImageUpload } from '../Icon';
+import { EDIT_USER } from './PopUpQueries';
 import * as S from './PopUpStyles'
+import Loader from '../Loader';
+import { toast } from 'react-toastify';
 
 
 interface IProps {
@@ -24,6 +29,25 @@ const PopUpPresenter: React.FC<IProps> = ({ setPopup, me }) => {
         console.log(acceptedFiles)
     }, [])
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: "image/png, image/jpeg" });
+
+    const [EditUserMutation] = useMutation<EditUser, EditUserVariables>(EDIT_USER, {
+        variables: {
+            firstName,
+            lastName,
+            intro,
+            profilePhoto: imageUrl
+        },
+        onCompleted: ({ EditUser }) => {
+            const { ok, err } = EditUser
+            if (ok) {
+                toast.success("User Data edited")
+                setPopup(false);
+                window.location.reload();
+            } else {
+                console.log(err)
+            }
+        }
+    })
 
 
     const handleUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,26 +83,43 @@ const PopUpPresenter: React.FC<IProps> = ({ setPopup, me }) => {
                 <S.ExitButton onClick={() => setPopup(false)}>X</S.ExitButton>
             </S.Headbar>
             <S.PopupBody>
-                <S.UploadDiv {...getRootProps()}>
-                    <input {...getInputProps()} onChange={handleUpload} />
-                    <ImageUpload />
+                {progress === 0 ?
+                    <S.UploadDiv {...getRootProps()}>
+                        <input {...getInputProps()} onChange={handleUpload} />
+                        <ImageUpload />
                     Click here or drag image to upload
-                </S.UploadDiv>
+                </S.UploadDiv> : progress === 100 ? "Uploaded" : <Loader />}
+
                 <S.Row>
                     <S.Title>First Name</S.Title>
-                    <S.Input type="text" placeholder="First Name" />
+                    <S.Input
+                        type="text"
+                        placeholder="First Name"
+                        value={firstName}
+                        onChange={firstNameChange}
+                    />
                 </S.Row>
                 <S.Row>
                     <S.Title>Last Name</S.Title>
-                    <S.Input type="text" placeholder="Last Name" />
+                    <S.Input
+                        type="text"
+                        placeholder="Last Name"
+                        value={lastName}
+                        onChange={lastNameChange}
+                    />
                 </S.Row>
                 <S.Row>
                     <S.Title>Intro</S.Title>
-                    <S.Input type="text" placeholder="Intro" />
+                    <S.Input
+                        type="text"
+                        placeholder="Intro"
+                        value={intro}
+                        onChange={introChange}
+                    />
                 </S.Row>
             </S.PopupBody>
             <S.PopUpBottom>
-                <S.Button>Submit</S.Button>
+                <S.Button onClick={() => EditUserMutation()}>Submit</S.Button>
             </S.PopUpBottom>
         </S.Container>
     )

@@ -3,12 +3,11 @@ import * as S from './ProfileStyles'
 import Header from '../../Components/Header'
 import { HeartFull, Message, Settings } from '../../Components/Icon'
 import PopUp from '../../Components/PopUp'
+import { userLogOut } from '../../Apollo/authResolvers'
 
 interface IProps {
     me: any
     user: any
-    term: string
-    termChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
     FollowingHandler: (username: string) => void
     followingS: boolean | null | undefined
     isMe: boolean
@@ -19,8 +18,6 @@ interface IProps {
 const ProfilePresenter: React.FC<IProps> = ({
     me,
     user,
-    term,
-    termChange,
     FollowingHandler,
     followingS,
     isMe,
@@ -30,7 +27,7 @@ const ProfilePresenter: React.FC<IProps> = ({
     console.log(user);
     return (
         <S.Wrapper>
-            <Header url={me.profilePhoto} term={term} termChange={termChange} />
+            <Header url={me.profilePhoto} />
             <S.Container>
                 <S.UserDetail>
                     <S.Row>
@@ -58,7 +55,14 @@ const ProfilePresenter: React.FC<IProps> = ({
                         </S.UserDetailCol>
                     </S.Row>
                     <S.Row>
-                        <S.Intro>{user.intro}</S.Intro>
+                        <S.UserDetailCol>
+                            <S.Intro>{user.intro}</S.Intro>
+                        </S.UserDetailCol>
+                        {isMe ?
+                            <S.UserDetailCol><S.LogoutButton onClick={() => userLogOut()}>Logout</S.LogoutButton></S.UserDetailCol>
+                            :
+                            <S.UserDetailCol> </S.UserDetailCol>
+                        }
                     </S.Row>
                 </S.UserDetail>
                 <S.UserPosts>

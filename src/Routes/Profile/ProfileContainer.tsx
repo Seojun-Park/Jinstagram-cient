@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client'
 import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
-import useInput from '../../Hooks/useInput'
 import { ME, SEE_USER } from '../../sharedquaries'
 import { Me, SeeUser, SeeUserVariables, ToggleFollowing, ToggleFollowingVariables } from '../../types/api'
 import ProfilePresenter from './ProfilePresenter'
@@ -17,7 +16,6 @@ interface IProps extends RouteComponentProps<IRouteParam> {
 const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
     const { username } = params;
     const [isMe, setIsMe] = useState<boolean>(false)
-    const [term, termChange] = useInput("")
     const [me, setMe] = useState<any>()
     const [user, setUser] = useState<any>()
     const [followingS, setFollowingS] = useState<boolean | null | undefined>();
@@ -89,8 +87,6 @@ const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
         <ProfilePresenter
             me={me}
             user={user}
-            term={term}
-            termChange={termChange}
             FollowingHandler={FollowingHandler}
             followingS={followingS}
             isMe={isMe}

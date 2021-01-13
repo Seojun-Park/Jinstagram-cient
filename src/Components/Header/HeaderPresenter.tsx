@@ -5,16 +5,16 @@ import { Me, SearchUser, SearchUserVariables } from '../../types/api';
 import { Link } from 'react-router-dom'
 import { Logo } from '../Icon'
 import * as S from './HeaderStyles'
+import useInput from '../../Hooks/useInput';
 
 interface IProps {
     url?: string
-    term: string
-    termChange: (
-        e: React.ChangeEvent<HTMLInputElement>) => void
+
 }
 
-const HeaderPresenter: React.FC<IProps> = ({ url, term, termChange }) => {
+const HeaderPresenter: React.FC<IProps> = ({ url }) => {
     const [me, setMe] = useState<any>();
+    const [term, termChange] = useInput("")
     const [searchedUser, setSearchedUser] = useState<any>([]);
     const { loading } = useQuery<Me>(ME, {
         onCompleted: ({ Me }) => {

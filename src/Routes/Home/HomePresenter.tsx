@@ -1,5 +1,5 @@
 
-import React, { useCallback } from 'react'
+import React from 'react'
 import Header from '../../Components/Header'
 import Loader from '../../Components/Loader'
 import FeedBox from '../../Components/FeedBox'
@@ -10,9 +10,6 @@ import * as S from './HomeStyles'
 interface IProps {
     me: any
     posts: any
-    term: string
-    termChange: (
-        e: React.ChangeEvent<HTMLInputElement>) => void
     imageUrl: any
     setImageUrl: any
     progress: number
@@ -28,8 +25,6 @@ interface IProps {
 
 const HomePresenter: React.FC<IProps> = ({
     me,
-    term,
-    termChange,
     posts,
     imageUrl,
     setImageUrl,
@@ -45,7 +40,7 @@ const HomePresenter: React.FC<IProps> = ({
     const { getRootProps, getInputProps } = useDropzone({ accept: "image/png, image/jpeg" })
     return (
         <S.Wrapper>
-            <Header url={me.profilePhoto} term={term} termChange={termChange} />
+            <Header url={me.profilePhoto} />
             <S.Container>
                 <S.Post>
                     <S.Textarea

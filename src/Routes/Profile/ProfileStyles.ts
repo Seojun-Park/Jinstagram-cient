@@ -49,8 +49,24 @@ export const Intro = styled.p`
   margin-left: 45px;
 `;
 
+export const LogoutButton = styled.div`
+  width: 180px;
+  padding: 8px 0;
+  border-radius: 4px;
+  border: none;
+  background-color: #e74c3c;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  font-size: 14px;
+  &:hover {
+    background-color: #c0392b;
+  }
+`;
+
 export const Profile = styled.img`
-  width: 80px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
   border-radius: 10rem;
 `;
@@ -68,6 +84,9 @@ export const FollowingButton = styled.button`
   background-color: #3498db;
   color: white;
   cursor: pointer;
+  &:hover {
+    background-color: #2980b9;
+  }
 `;
 
 export const UserPosts = styled.div`

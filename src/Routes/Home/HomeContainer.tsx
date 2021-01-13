@@ -28,7 +28,6 @@ const HomeContainer: React.FC<IProps> = () => {
     const [imageUrl, setImageUrl] = useState<string[]>([]);
     const [progress, setProgress] = useState(1);
     const [page, setPage] = useState<number>(1);
-    const [term, termChange] = useInput("")
     const [posts, setPosts] = useState<any>();
     const [lat, setLat] = useState<number>(0)
     const [lng, setLng] = useState<number>(0)
@@ -141,8 +140,6 @@ const HomeContainer: React.FC<IProps> = () => {
     } else {
         return (
             <HomePresenter me={me}
-                term={term}
-                termChange={termChange}
                 posts={posts}
                 imageUrl={imageUrl}
                 flag={flag}
