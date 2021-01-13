@@ -1,7 +1,7 @@
 import React from 'react'
 import * as S from './ProfileStyles'
 import Header from '../../Components/Header'
-import { HeartFull, Message, Settings } from '../../Components/Icon'
+import { HeartFull, Message } from '../../Components/Icon'
 import PopUp from '../../Components/PopUp'
 import { userLogOut } from '../../Apollo/authResolvers'
 

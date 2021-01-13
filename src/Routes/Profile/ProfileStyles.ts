@@ -74,6 +74,7 @@ export const Profile = styled.img`
 export const Username = styled.span`
   font-weight: 600;
   font-size: 24px;
+  margin-right: 15px;
 `;
 
 export const FollowingButton = styled.button`

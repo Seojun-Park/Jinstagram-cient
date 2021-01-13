@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ME, SEARCH_USER } from '../../sharedquaries';
 import { Me, SearchUser, SearchUserVariables } from '../../types/api';
 import { Link } from 'react-router-dom'
@@ -14,6 +14,7 @@ interface IProps {
 
 const HeaderPresenter: React.FC<IProps> = ({ url }) => {
     const [me, setMe] = useState<any>();
+    const [open, setOpen] = useState<boolean>(false)
     const [term, termChange] = useInput("")
     const [searchedUser, setSearchedUser] = useState<any>([]);
     const { loading } = useQuery<Me>(ME, {
@@ -35,12 +36,29 @@ const HeaderPresenter: React.FC<IProps> = ({ url }) => {
             const { ok, err, users } = SearchUser;
             if (ok && users) {
                 setSearchedUser(users)
+                setOpen(true);
             }
             else {
                 console.log(err)
             }
         }
     })
+
+
+
+    useEffect(() => {
+        const handleClick = (e: MouseEvent) => {
+            e.preventDefault();
+            setOpen(false);
+        }
+        if (open) {
+            document.addEventListener("click", (e) => handleClick(e));
+            return function cleanUp() {
+                document.removeEventListener('click', (e) => handleClick(e))
+            }
+        }
+
+    }, [open])
 
 
     if (loading || !me) {
@@ -50,6 +68,8 @@ const HeaderPresenter: React.FC<IProps> = ({ url }) => {
             </>
         )
     }
+
+    console.log(searchedUser);
     return (
         <S.Container>
             <S.Col>
@@ -62,6 +82,23 @@ const HeaderPresenter: React.FC<IProps> = ({ url }) => {
                     value={term}
                     onChange={termChange}
                 />
+                {open ?
+                    (searchedUser && searchedUser.length ?
+                        <S.SearchResult>
+                            {searchedUser.map((user: any, index: number) => {
+                                return (
+                                    <S.SearchLink to={`/profile/${user.username}`}>
+                                        <S.SearchRow key={index}>
+                                            <S.ProfileImage src={user.profilePhoto} alt={user.username} />
+                                            <S.SearchUsername>{user.username}</S.SearchUsername>
+                                        </S.SearchRow>
+                                    </S.SearchLink>
+                                )
+                            })}
+                        </S.SearchResult> : <S.SearchResult>
+                            <S.SearchInfo>No user found</S.SearchInfo>
+                        </S.SearchResult>)
+                    : ""}
             </S.Col>
             <S.Col>
                 <S.ExtendedLink to={`/profile/${me.username}`}>

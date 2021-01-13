@@ -3,11 +3,13 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Home from '../Routes/Home'
 import AuthHome from '../Routes/AuthHome'
 import Profile from '../Routes/Profile'
+import Chat from '../Routes/Chat'
 
 const LoggedInRoutes = () => (
     <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/profile/:username" component={Profile} />
+        <Route path="/chat" component={Chat} />
         <Redirect from="*" to="/" />
     </Switch>
 )
