@@ -8,3 +8,15 @@ export const TOGGLE_FOLLOWING = gql`
     }
   }
 `;
+
+export const CREATE_CHAT = gql`
+  mutation CreateChat($toId: Int!) {
+    CreateChat(toId: $toId) {
+      ok
+      err
+      chat {
+        id
+      }
+    }
+  }
+`;

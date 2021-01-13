@@ -340,6 +340,35 @@ export interface ToggleFollowingVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: CreateChat
+// ====================================================
+
+export interface CreateChat_CreateChat_chat {
+  __typename: "Chat";
+  id: number;
+}
+
+export interface CreateChat_CreateChat {
+  __typename: "CreateChatResponse";
+  ok: boolean;
+  err: string | null;
+  chat: CreateChat_CreateChat_chat | null;
+}
+
+export interface CreateChat {
+  CreateChat: CreateChat_CreateChat;
+}
+
+export interface CreateChatVariables {
+  toId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: Me
 // ====================================================
 
@@ -510,6 +539,43 @@ export interface SearchUser {
 
 export interface SearchUserVariables {
   term: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetChat
+// ====================================================
+
+export interface GetChat_GetChat_chat_from {
+  __typename: "User";
+  id: number;
+}
+
+export interface GetChat_GetChat_chat_to {
+  __typename: "User";
+  id: number;
+}
+
+export interface GetChat_GetChat_chat {
+  __typename: "Chat";
+  id: number;
+  from: GetChat_GetChat_chat_from | null;
+  to: GetChat_GetChat_chat_to | null;
+}
+
+export interface GetChat_GetChat {
+  __typename: "GetChatResponse";
+  ok: boolean;
+  err: string | null;
+  chat: (GetChat_GetChat_chat | null)[] | null;
+}
+
+export interface GetChat {
+  GetChat: GetChat_GetChat;
 }
 
 /* tslint:disable */

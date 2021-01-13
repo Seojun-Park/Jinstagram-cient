@@ -103,3 +103,21 @@ export const SEARCH_USER = gql`
     }
   }
 `;
+
+export const GET_CHAT = gql`
+  query GetChat {
+    GetChat {
+      ok
+      err
+      chat {
+        id
+        from {
+          id
+        }
+        to {
+          id
+        }
+      }
+    }
+  }
+`;

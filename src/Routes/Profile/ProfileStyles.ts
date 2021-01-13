@@ -71,6 +71,12 @@ export const Profile = styled.img`
   border-radius: 10rem;
 `;
 
+export const Button = styled.button`
+  background-color: white;
+  border: none;
+  cursor: pointer;
+`;
+
 export const Username = styled.span`
   font-weight: 600;
   font-size: 24px;

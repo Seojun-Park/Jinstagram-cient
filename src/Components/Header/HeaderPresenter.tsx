@@ -87,8 +87,8 @@ const HeaderPresenter: React.FC<IProps> = ({ url }) => {
                         <S.SearchResult>
                             {searchedUser.map((user: any, index: number) => {
                                 return (
-                                    <S.SearchLink to={`/profile/${user.username}`}>
-                                        <S.SearchRow key={index}>
+                                    <S.SearchLink to={`/profile/${user.username}`} key={index}>
+                                        <S.SearchRow>
                                             <S.ProfileImage src={user.profilePhoto} alt={user.username} />
                                             <S.SearchUsername>{user.username}</S.SearchUsername>
                                         </S.SearchRow>

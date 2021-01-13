@@ -1,10 +1,18 @@
 import { useMutation, useQuery } from '@apollo/client'
 import React, { useEffect, useState } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import { Link, RouteComponentProps } from 'react-router-dom'
 import { ME, SEE_USER } from '../../sharedquaries'
-import { Me, SeeUser, SeeUserVariables, ToggleFollowing, ToggleFollowingVariables } from '../../types/api'
+import {
+    Me,
+    SeeUser,
+    SeeUserVariables,
+    ToggleFollowing,
+    ToggleFollowingVariables,
+    CreateChat,
+    CreateChatVariables
+} from '../../types/api'
 import ProfilePresenter from './ProfilePresenter'
-import { TOGGLE_FOLLOWING } from './ProfileQueries'
+import { CREATE_CHAT, TOGGLE_FOLLOWING } from './ProfileQueries'
 
 interface IRouteParam {
     username: string
@@ -20,6 +28,7 @@ const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
     const [user, setUser] = useState<any>()
     const [followingS, setFollowingS] = useState<boolean | null | undefined>();
     const [popup, setPopup] = useState<boolean>(false)
+    const [chatPopup, setChatPopup] = useState<boolean>(false);
     useQuery<Me>(ME, {
         onCompleted: ({ Me }) => {
             const { ok, err, user } = Me;
@@ -57,11 +66,33 @@ const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
             }
         })
 
+    const [CreateChatMutation] = useMutation<CreateChat, CreateChatVariables>(CREATE_CHAT, {
+        onCompleted: ({ CreateChat }) => {
+            const { ok, err, chat } = CreateChat;
+            if (ok) {
+                if (chat) {
+                    console.log(chat)
+                }
+            } else {
+                console.log(err)
+            }
+        }
+    })
+
     const FollowingHandler = (username: string) => {
         ToggleFollowingMutation({
             variables: {
                 username
             },
+        })
+    }
+
+    const ChatHandler = async () => {
+        console.log("came")
+        await CreateChatMutation({
+            variables: {
+                toId: user.id
+            }
         })
     }
 
@@ -92,6 +123,9 @@ const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
             isMe={isMe}
             popup={popup}
             setPopup={setPopup}
+            chatPopup={chatPopup}
+            setChatPopup={setChatPopup}
+            ChatHandler={ChatHandler}
         />
     )
 }

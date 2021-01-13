@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { EditUser, EditUserVariables } from '../../types/api'
 import { useDropzone } from 'react-dropzone';
 import { storage } from '../../Firebase';
@@ -25,10 +25,7 @@ const PopUpPresenter: React.FC<IProps> = ({ setPopup, me }) => {
     const [intro, introChange] = useInput("");
     const [imageUrl, setImageUrl] = useState<string>('')
 
-    const onDrop = useCallback(acceptedFiles => {
-        console.log(acceptedFiles)
-    }, [])
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: "image/png, image/jpeg" });
+    const { getRootProps, getInputProps } = useDropzone({ accept: "image/png, image/jpeg" });
 
     const [EditUserMutation] = useMutation<EditUser, EditUserVariables>(EDIT_USER, {
         variables: {

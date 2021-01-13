@@ -4,6 +4,8 @@ import Header from '../../Components/Header'
 import { HeartFull, Message } from '../../Components/Icon'
 import PopUp from '../../Components/PopUp'
 import { userLogOut } from '../../Apollo/authResolvers'
+import { Link } from 'react-router-dom'
+import ChatPopup from '../../Components/ChatPopup'
 
 interface IProps {
     me: any
@@ -13,6 +15,9 @@ interface IProps {
     isMe: boolean
     popup: boolean
     setPopup: React.Dispatch<React.SetStateAction<boolean>>
+    chatPopup: boolean
+    setChatPopup: React.Dispatch<React.SetStateAction<boolean>>
+    ChatHandler: any
 }
 
 const ProfilePresenter: React.FC<IProps> = ({
@@ -22,9 +27,11 @@ const ProfilePresenter: React.FC<IProps> = ({
     followingS,
     isMe,
     popup,
-    setPopup
+    setPopup,
+    chatPopup,
+    setChatPopup,
+    ChatHandler
 }) => {
-    console.log(user);
     return (
         <S.Wrapper>
             <Header url={me.profilePhoto} />
@@ -37,7 +44,18 @@ const ProfilePresenter: React.FC<IProps> = ({
                         <S.UserDetailCol>
                             <S.UserDetailRow>
                                 <S.Username>{user.username}</S.Username>
-                                {isMe ? "" : <Message />}
+                                {isMe ?
+                                    <>
+                                        <S.Button onClick={() => setChatPopup(true)}>
+                                            <Message />
+                                        </S.Button>
+                                        {chatPopup ? <ChatPopup setPopup={setChatPopup} me={me} /> : ""}
+                                    </>
+                                    :
+                                    <S.Button onClick={() => ChatHandler}>
+                                        <Message />
+                                    </S.Button>
+                                }
                             </S.UserDetailRow>
                             <S.UserDetailRow>
                                 {user.firstName} {user.lastName}

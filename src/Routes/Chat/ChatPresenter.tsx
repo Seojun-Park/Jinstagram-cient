@@ -1,10 +1,16 @@
 import React from "react";
+import Header from '../../Components/Header'
+import * as S from './ChatStyles'
 
-const ChatPresenter = () => {
+interface IProps {
+    me: any
+}
+
+const ChatPresenter: React.FC<IProps> = ({ me }) => {
     return (
-        <>
-            chat
-        </>
+        <S.Wrapper>
+            <Header url={me.profilePhoto} />
+        </S.Wrapper>
     )
 };
 
