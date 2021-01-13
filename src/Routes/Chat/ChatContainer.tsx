@@ -1,18 +1,22 @@
 import { useQuery } from '@apollo/client';
 import React, { useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import Loader from '../../Components/Loader';
 import { ME } from '../../sharedquaries';
-import { Me } from '../../types/api';
+import { Me, GetChatRoom, GetChatRoomVariables } from '../../types/api';
 import ChatPresenter from './ChatPresenter'
+import { GET_CHAT_ROOM } from './ChatQueries';
+import * as S from './ChatStyles'
 
 interface IProps extends RouteComponentProps {
     match: any
 }
 
-const ChatContainer: React.FC<IProps> = ({ match }) => {
-    console.log(match)
+const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
+    const { chatId } = params
     const [me, setMe] = useState<any>()
-    const { loading } = useQuery<Me>(ME, {
+    const [chat, setChat] = useState<any>()
+    useQuery<Me>(ME, {
         onCompleted: ({ Me }) => {
             const { ok, err, user } = Me
             if (ok && user) {
@@ -22,11 +26,27 @@ const ChatContainer: React.FC<IProps> = ({ match }) => {
             }
         }
     })
-    if (loading || !me) {
+    const { loading } = useQuery<GetChatRoom, GetChatRoomVariables>(GET_CHAT_ROOM, {
+        variables: {
+            chatId: parseInt(chatId)
+        },
+        onCompleted: ({ GetChatRoom }) => {
+            const { ok, err, chat } = GetChatRoom;
+            if (ok && chat) {
+                setChat(chat);
+            } else {
+                console.log(err)
+            }
+        }
+    })
+
+    console.log(chat)
+
+    if (loading || !me || !chat) {
         return (
-            <>
-                Loading
-            </>
+            <S.LoadingWrapper>
+                <Loader />
+            </S.LoadingWrapper>
         )
     } else {
         return (

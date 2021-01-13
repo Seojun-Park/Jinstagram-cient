@@ -68,8 +68,6 @@ const HeaderPresenter: React.FC<IProps> = ({ url }) => {
             </>
         )
     }
-
-    console.log(searchedUser);
     return (
         <S.Container>
             <S.Col>

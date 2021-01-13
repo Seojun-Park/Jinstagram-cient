@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
@@ -20,35 +21,44 @@ export const Container = styled.div`
 export const Headbar = styled.div`
   display: flex;
   width: 100%;
-  justify-content: flex-end;
-  margin-bottom: 40px;
+  justify-content: space-between;
+  margin-bottom: 10px;
 `;
 
 export const ExitButton = styled.button`
   border: none;
   padding: 4px 6px;
+  height: 22px;
+  width: 22px;
+  cursor: pointer;
   &:hover {
     background-color: lightgray;
   }
 `;
 
+export const TitleDiv = styled.div`
+  text-align: center;
+`;
+
+export const Title = styled.h2``;
+
 export const PopupBody = styled.div`
   width: 100%;
-  padding-left: 15px;
   display: flex;
   flex-direction: column;
 `;
 
 export const Row = styled.div`
+  padding: 8px 0;
+  padding-left: 15px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 55px;
-`;
-
-export const Title = styled.span`
-  width: 100px;
-  font-weight: 600;
+  margin-bottom: 5px;
+  &:hover {
+    background-color: #eee;
+    transition: 0.2s linear;
+  }
 `;
 
 export const Input = styled.input`
@@ -95,4 +105,31 @@ export const UploadDiv = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+`;
+
+export const ProfileImage = styled.img`
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 10rem;
+`;
+
+export const SmallRow = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const RowUsername = styled.span`
+  padding-left: 30px;
+  font-weight: 600;
+  color: black;
+`;
+
+export const RowMessage = styled.span`
+  padding-left: 35px;
+  color: #ccc;
+`;
+
+export const ExtendedLink = styled(Link)`
+  text-decoration: none;
 `;

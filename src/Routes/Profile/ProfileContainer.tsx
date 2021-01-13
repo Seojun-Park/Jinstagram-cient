@@ -1,6 +1,7 @@
+import { createBrowserHistory } from 'history'
 import { useMutation, useQuery } from '@apollo/client'
 import React, { useEffect, useState } from 'react'
-import { Link, RouteComponentProps } from 'react-router-dom'
+import { RouteComponentProps } from 'react-router-dom'
 import { ME, SEE_USER } from '../../sharedquaries'
 import {
     Me,
@@ -54,6 +55,8 @@ const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
         }
     })
 
+    const forceHistory = createBrowserHistory({ forceRefresh: true })
+
     const [ToggleFollowingMutation] = useMutation<ToggleFollowing,
         ToggleFollowingVariables>(TOGGLE_FOLLOWING, {
             onCompleted: ({ ToggleFollowing }) => {
@@ -71,7 +74,7 @@ const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
             const { ok, err, chat } = CreateChat;
             if (ok) {
                 if (chat) {
-                    console.log(chat)
+                    forceHistory.push(`/chat/${chat.id}`)
                 }
             } else {
                 console.log(err)

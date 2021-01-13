@@ -222,6 +222,64 @@ export interface ConfirmSecretVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetChatRoom
+// ====================================================
+
+export interface GetChatRoom_GetChatRoom_chat_from {
+  __typename: "User";
+  id: number;
+  username: string;
+}
+
+export interface GetChatRoom_GetChatRoom_chat_to {
+  __typename: "User";
+  id: number;
+  username: string;
+}
+
+export interface GetChatRoom_GetChatRoom_chat_messages_user {
+  __typename: "User";
+  id: number;
+  username: string;
+}
+
+export interface GetChatRoom_GetChatRoom_chat_messages {
+  __typename: "Message";
+  id: number;
+  text: string;
+  user: GetChatRoom_GetChatRoom_chat_messages_user;
+  createdAt: string | null;
+}
+
+export interface GetChatRoom_GetChatRoom_chat {
+  __typename: "Chat";
+  id: number;
+  from: GetChatRoom_GetChatRoom_chat_from | null;
+  to: GetChatRoom_GetChatRoom_chat_to | null;
+  messages: (GetChatRoom_GetChatRoom_chat_messages | null)[] | null;
+}
+
+export interface GetChatRoom_GetChatRoom {
+  __typename: "GetChatRoomResponse";
+  ok: boolean;
+  err: string | null;
+  chat: GetChatRoom_GetChatRoom_chat | null;
+}
+
+export interface GetChatRoom {
+  GetChatRoom: GetChatRoom_GetChatRoom;
+}
+
+export interface GetChatRoomVariables {
+  chatId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: UploadPost
 // ====================================================
 

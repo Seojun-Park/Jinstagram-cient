@@ -33,13 +33,28 @@ const ChatPopupPresenter: React.FC<IProps> = ({ setPopup, me }) => {
         return (
             <S.Container>
                 <S.Headbar>
+                    <S.TitleDiv>
+                    </S.TitleDiv>
+                    <S.Title>Chat List</S.Title>
                     <S.ExitButton onClick={() => setPopup(false)}>X</S.ExitButton>
                 </S.Headbar>
+
                 <S.PopupBody>
                     {chatList && chatList.length === 0 ? "You don't have any chats"
                         : chatList && chatList.map((chat: any, index: number) => {
                             return (
-                                <S.Row key={index}>{chat.id}</S.Row>
+                                <S.ExtendedLink key={index} to={`/chat/${chat.id}`}>
+                                    <S.Row>
+                                        <S.ProfileImage src={chat.to.profilePhoto} alt={"to"} />
+                                        <S.SmallRow>
+                                            <S.RowUsername>To : {chat.to.username}</S.RowUsername>
+                                            {chat.messages && chat.messages.length !== 0 ?
+                                                <S.RowMessage>{chat.messages[chat.messages.length - 1].user.username} : {chat.messages[chat.messages.length - 1].text}</S.RowMessage> :
+                                                <S.RowMessage>No message</S.RowMessage>
+                                            }
+                                        </S.SmallRow>
+                                    </S.Row>
+                                </S.ExtendedLink>
                             )
                         })}
                 </S.PopupBody>
