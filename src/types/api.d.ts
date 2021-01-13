@@ -553,11 +553,28 @@ export interface SearchUserVariables {
 export interface GetChat_GetChat_chat_from {
   __typename: "User";
   id: number;
+  profilePhoto: string | null;
+  username: string;
 }
 
 export interface GetChat_GetChat_chat_to {
   __typename: "User";
   id: number;
+  profilePhoto: string | null;
+  username: string;
+}
+
+export interface GetChat_GetChat_chat_messages_user {
+  __typename: "User";
+  id: number;
+  username: string;
+}
+
+export interface GetChat_GetChat_chat_messages {
+  __typename: "Message";
+  user: GetChat_GetChat_chat_messages_user;
+  text: string;
+  createdAt: string | null;
 }
 
 export interface GetChat_GetChat_chat {
@@ -565,6 +582,7 @@ export interface GetChat_GetChat_chat {
   id: number;
   from: GetChat_GetChat_chat_from | null;
   to: GetChat_GetChat_chat_to | null;
+  messages: (GetChat_GetChat_chat_messages | null)[] | null;
 }
 
 export interface GetChat_GetChat {

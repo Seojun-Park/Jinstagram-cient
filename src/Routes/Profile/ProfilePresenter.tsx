@@ -52,7 +52,7 @@ const ProfilePresenter: React.FC<IProps> = ({
                                         {chatPopup ? <ChatPopup setPopup={setChatPopup} me={me} /> : ""}
                                     </>
                                     :
-                                    <S.Button onClick={() => ChatHandler}>
+                                    <S.Button onClick={ChatHandler}>
                                         <Message />
                                     </S.Button>
                                 }

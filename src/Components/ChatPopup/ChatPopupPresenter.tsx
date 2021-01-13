@@ -36,7 +36,12 @@ const ChatPopupPresenter: React.FC<IProps> = ({ setPopup, me }) => {
                     <S.ExitButton onClick={() => setPopup(false)}>X</S.ExitButton>
                 </S.Headbar>
                 <S.PopupBody>
-                    {chatList && chatList.length === 0 && "You don't have any chats"}
+                    {chatList && chatList.length === 0 ? "You don't have any chats"
+                        : chatList && chatList.map((chat: any, index: number) => {
+                            return (
+                                <S.Row key={index}>{chat.id}</S.Row>
+                            )
+                        })}
                 </S.PopupBody>
             </S.Container>
         )

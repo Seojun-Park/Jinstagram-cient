@@ -113,9 +113,21 @@ export const GET_CHAT = gql`
         id
         from {
           id
+          profilePhoto
+          username
         }
         to {
           id
+          profilePhoto
+          username
+        }
+        messages {
+          user {
+            id
+            username
+          }
+          text
+          createdAt
         }
       }
     }
