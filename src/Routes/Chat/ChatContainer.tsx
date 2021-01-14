@@ -1,11 +1,23 @@
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery, useSubscription } from '@apollo/client';
 import React, { useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import Loader from '../../Components/Loader';
+import useInput from '../../Hooks/useInput';
 import { ME } from '../../sharedquaries';
-import { Me, GetChatRoom, GetChatRoomVariables } from '../../types/api';
+import {
+    Me,
+    GetChatRoom,
+    GetChatRoomVariables,
+    MessageSubscription,
+    SendMessage,
+    SendMessageVariables
+} from '../../types/api';
 import ChatPresenter from './ChatPresenter'
-import { GET_CHAT_ROOM } from './ChatQueries';
+import {
+    GET_CHAT_ROOM,
+    MESSAGE_SUBSCRIPTION,
+    SEND_MESSAGE
+} from './ChatQueries';
 import * as S from './ChatStyles'
 
 interface IProps extends RouteComponentProps {
@@ -15,6 +27,8 @@ interface IProps extends RouteComponentProps {
 const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
     const { chatId } = params
     const [me, setMe] = useState<any>()
+    const [message, onChangeMessage, setMessage] = useInput("")
+    const [messages, setMessages] = useState<any[]>()
     const [chat, setChat] = useState<any>()
     useQuery<Me>(ME, {
         onCompleted: ({ Me }) => {
@@ -34,13 +48,52 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
             const { ok, err, chat } = GetChatRoom;
             if (ok && chat) {
                 setChat(chat);
+                if (chat.messages) {
+                    const messages = chat.messages.map(msg => {
+                        if (msg) {
+                            return {
+                                ...msg,
+                                mine: me.id === msg.user.id
+                            }
+                        } else {
+                            return null;
+                        }
+                    })
+                    setMessages(messages)
+                } else {
+                    console.log("no messages")
+                }
             } else {
                 console.log(err)
             }
         }
     })
 
-    console.log(chat)
+    useSubscription<MessageSubscription>(MESSAGE_SUBSCRIPTION, {
+        onSubscriptionComplete: () => {
+            console.log("Listening new messages");
+        },
+        onSubscriptionData: ({ subscriptionData }) => {
+            const { data } = subscriptionData;
+            if (data && messages && me) {
+                setMessage("");
+                const { MessageSubscription } = data;
+                if (MessageSubscription) {
+                    setMessages([...messages, {
+                        ...MessageSubscription,
+                        mine: me.id === MessageSubscription.user.id
+                    }])
+                }
+            }
+        }
+    })
+
+    const [SendMessageMutation] = useMutation<SendMessage, SendMessageVariables>(SEND_MESSAGE, {
+        variables: {
+            text: message,
+            chatId: parseInt(chatId)
+        }
+    })
 
     if (loading || !me || !chat) {
         return (
@@ -52,6 +105,11 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
         return (
             <ChatPresenter
                 me={me}
+                messages={messages}
+                message={message}
+                onChangeMessage={onChangeMessage}
+                SendMessageMutation={SendMessageMutation}
+                chatId={parseInt(chatId)}
             />
         )
     }

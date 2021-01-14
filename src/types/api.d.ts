@@ -280,6 +280,63 @@ export interface GetChatRoomVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL subscription operation: MessageSubscription
+// ====================================================
+
+export interface MessageSubscription_MessageSubscription_user {
+  __typename: "User";
+  id: number;
+}
+
+export interface MessageSubscription_MessageSubscription {
+  __typename: "Message";
+  id: number;
+  text: string;
+  user: MessageSubscription_MessageSubscription_user;
+}
+
+export interface MessageSubscription {
+  MessageSubscription: MessageSubscription_MessageSubscription | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: SendMessage
+// ====================================================
+
+export interface SendMessage_SendMessage_message {
+  __typename: "Message";
+  id: number;
+  text: string;
+  createdAt: string | null;
+}
+
+export interface SendMessage_SendMessage {
+  __typename: "SendMessageResponse";
+  ok: boolean;
+  err: string | null;
+  message: SendMessage_SendMessage_message | null;
+}
+
+export interface SendMessage {
+  SendMessage: SendMessage_SendMessage;
+}
+
+export interface SendMessageVariables {
+  text: string;
+  chatId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: UploadPost
 // ====================================================
 
