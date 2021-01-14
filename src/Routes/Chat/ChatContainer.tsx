@@ -75,6 +75,7 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
         },
         onSubscriptionData: ({ subscriptionData }) => {
             const { data } = subscriptionData;
+            console.log(subscriptionData, data)
             if (data && messages && me) {
                 setMessage("");
                 const { MessageSubscription } = data;
