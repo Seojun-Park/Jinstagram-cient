@@ -28,7 +28,8 @@ export const Head = styled.div`
 `;
 
 export const MessageBox = styled.div`
-  min-height: 500px;
+  min-height: 400px;
+  max-height: 500px;
   padding: 20px;
   overflow: scroll;
   display: flex;
@@ -45,7 +46,8 @@ export const InputBox = styled.div`
 `;
 
 export const MessageInput = styled.input`
-  width: 80%;
+  width: 100%;
+  margin: 0 auto;
   padding: 8px 10px;
   border: none;
   background-color: #eee;
@@ -64,10 +66,4 @@ export const SendButton = styled.button`
   }
 `;
 
-export const ExtendedForm = styled(Form)`
-  border-top: 2px solid #ccc;
-  padding: 10px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
+export const ExtendedForm = styled(Form)``;

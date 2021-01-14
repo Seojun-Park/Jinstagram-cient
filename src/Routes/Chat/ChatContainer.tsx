@@ -92,6 +92,14 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
         variables: {
             text: message,
             chatId: parseInt(chatId)
+        },
+        onCompleted: ({ SendMessage }) => {
+            const { ok, err } = SendMessage;
+            if (ok) {
+                setMessage("")
+            } else {
+                console.log(err)
+            }
         }
     })
 
