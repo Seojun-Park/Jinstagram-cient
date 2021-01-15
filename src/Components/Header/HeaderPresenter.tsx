@@ -46,14 +46,14 @@ const HeaderPresenter: React.FC<IProps> = ({ url }) => {
 
 
 
-    useEffect(() => {
+    useEffect((): any => {
         const handleClick = (e: MouseEvent) => {
             e.preventDefault();
             setOpen(false);
         }
         if (open) {
             document.addEventListener("click", (e) => handleClick(e));
-            return function cleanUp() {
+            return () => function cleanUp() {
                 document.removeEventListener('click', (e) => handleClick(e))
             }
         }

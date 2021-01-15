@@ -13,23 +13,13 @@ export const ME = gql`
         lastName
         username
         intro
-        following {
+        followings {
           id
-          email
-          profilePhoto
-          firstName
-          lastName
-          username
-          intro
+          userId
         }
-        follower {
+        followers {
           id
-          email
-          profilePhoto
-          firstName
-          lastName
-          username
-          intro
+          userId
         }
         posts {
           id
@@ -53,23 +43,13 @@ export const SEE_USER = gql`
         username
         isFollowing
         intro
-        following {
+        followings {
           id
-          email
-          profilePhoto
-          firstName
-          lastName
-          username
-          intro
+          userId
         }
-        follower {
+        followers {
           id
-          email
-          profilePhoto
-          firstName
-          lastName
-          username
-          intro
+          userId
         }
         posts {
           id

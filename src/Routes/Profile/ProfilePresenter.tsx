@@ -4,7 +4,6 @@ import Header from '../../Components/Header'
 import { HeartFull, Message } from '../../Components/Icon'
 import PopUp from '../../Components/PopUp'
 import { userLogOut } from '../../Apollo/authResolvers'
-import { Link } from 'react-router-dom'
 import ChatPopup from '../../Components/ChatPopup'
 
 interface IProps {

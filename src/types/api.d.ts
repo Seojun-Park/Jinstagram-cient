@@ -487,26 +487,16 @@ export interface CreateChatVariables {
 // GraphQL query operation: Me
 // ====================================================
 
-export interface Me_Me_user_following {
-  __typename: "User";
+export interface Me_Me_user_followings {
+  __typename: "Following";
   id: number;
-  email: string;
-  profilePhoto: string | null;
-  firstName: string;
-  lastName: string;
-  username: string;
-  intro: string | null;
+  userId: number | null;
 }
 
-export interface Me_Me_user_follower {
-  __typename: "User";
+export interface Me_Me_user_followers {
+  __typename: "Follower";
   id: number;
-  email: string;
-  profilePhoto: string | null;
-  firstName: string;
-  lastName: string;
-  username: string;
-  intro: string | null;
+  userId: number | null;
 }
 
 export interface Me_Me_user_posts {
@@ -523,8 +513,8 @@ export interface Me_Me_user {
   lastName: string;
   username: string;
   intro: string | null;
-  following: (Me_Me_user_following | null)[] | null;
-  follower: (Me_Me_user_follower | null)[] | null;
+  followings: (Me_Me_user_followings | null)[] | null;
+  followers: (Me_Me_user_followers | null)[] | null;
   posts: (Me_Me_user_posts | null)[] | null;
 }
 
@@ -548,26 +538,16 @@ export interface Me {
 // GraphQL query operation: SeeUser
 // ====================================================
 
-export interface SeeUser_SeeUser_user_following {
-  __typename: "User";
+export interface SeeUser_SeeUser_user_followings {
+  __typename: "Following";
   id: number;
-  email: string;
-  profilePhoto: string | null;
-  firstName: string;
-  lastName: string;
-  username: string;
-  intro: string | null;
+  userId: number | null;
 }
 
-export interface SeeUser_SeeUser_user_follower {
-  __typename: "User";
+export interface SeeUser_SeeUser_user_followers {
+  __typename: "Follower";
   id: number;
-  email: string;
-  profilePhoto: string | null;
-  firstName: string;
-  lastName: string;
-  username: string;
-  intro: string | null;
+  userId: number | null;
 }
 
 export interface SeeUser_SeeUser_user_posts_images {
@@ -603,8 +583,8 @@ export interface SeeUser_SeeUser_user {
   username: string;
   isFollowing: boolean | null;
   intro: string | null;
-  following: (SeeUser_SeeUser_user_following | null)[] | null;
-  follower: (SeeUser_SeeUser_user_follower | null)[] | null;
+  followings: (SeeUser_SeeUser_user_followings | null)[] | null;
+  followers: (SeeUser_SeeUser_user_followers | null)[] | null;
   posts: (SeeUser_SeeUser_user_posts | null)[] | null;
   comments: (SeeUser_SeeUser_user_comments | null)[] | null;
   likes: (SeeUser_SeeUser_user_likes | null)[] | null;
