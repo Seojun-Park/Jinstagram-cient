@@ -538,16 +538,28 @@ export interface Me {
 // GraphQL query operation: SeeUser
 // ====================================================
 
+export interface SeeUser_SeeUser_user_followings_user {
+  __typename: "User";
+  username: string;
+  profilePhoto: string | null;
+}
+
 export interface SeeUser_SeeUser_user_followings {
   __typename: "Following";
   id: number;
-  userId: number | null;
+  user: SeeUser_SeeUser_user_followings_user;
+}
+
+export interface SeeUser_SeeUser_user_followers_user {
+  __typename: "User";
+  username: string;
+  profilePhoto: string | null;
 }
 
 export interface SeeUser_SeeUser_user_followers {
   __typename: "Follower";
   id: number;
-  userId: number | null;
+  user: SeeUser_SeeUser_user_followers_user;
 }
 
 export interface SeeUser_SeeUser_user_posts_images {

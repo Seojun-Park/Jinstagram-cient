@@ -18,7 +18,6 @@ import { CREATE_CHAT, TOGGLE_FOLLOWING } from './ProfileQueries'
 interface IRouteParam {
     username: string
 }
-
 interface IProps extends RouteComponentProps<IRouteParam> {
 }
 
@@ -29,6 +28,8 @@ const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
     const [user, setUser] = useState<any>()
     const [followingS, setFollowingS] = useState<boolean | null | undefined>();
     const [popup, setPopup] = useState<boolean>(false)
+    const [followPopup, setFollowPopup] = useState<boolean>(false)
+    const [action, setAction] = useState<string>("")
     const [chatPopup, setChatPopup] = useState<boolean>(false);
     useQuery<Me>(ME, {
         onCompleted: ({ Me }) => {
@@ -126,9 +127,13 @@ const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
             isMe={isMe}
             popup={popup}
             setPopup={setPopup}
+            followPopup={followPopup}
+            setFollowPopup={setFollowPopup}
             chatPopup={chatPopup}
             setChatPopup={setChatPopup}
             ChatHandler={ChatHandler}
+            action={action}
+            setAction={setAction}
         />
     )
 }

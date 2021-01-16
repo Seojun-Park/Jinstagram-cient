@@ -45,11 +45,17 @@ export const SEE_USER = gql`
         intro
         followings {
           id
-          userId
+          user {
+            username
+            profilePhoto
+          }
         }
         followers {
           id
-          userId
+          user {
+            username
+            profilePhoto
+          }
         }
         posts {
           id

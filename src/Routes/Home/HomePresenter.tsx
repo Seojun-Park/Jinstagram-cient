@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../../Components/Header'
 import Loader from '../../Components/Loader'
 import FeedBox from '../../Components/FeedBox'
@@ -10,34 +10,41 @@ import * as S from './HomeStyles'
 interface IProps {
     me: any
     posts: any
-    imageUrl: any
-    setImageUrl: any
     progress: number
+    page: number
+    setPage: React.Dispatch<React.SetStateAction<number>>
     handleUpload: (
         e: React.ChangeEvent<HTMLInputElement>) => void
     flag: boolean
     caption: string
     setCaption: (
         e: React.ChangeEvent<HTMLTextAreaElement>) => void
-    UploadPostMutation: any
     handlePost: any
 }
 
 const HomePresenter: React.FC<IProps> = ({
     me,
     posts,
-    imageUrl,
-    setImageUrl,
+    page,
+    setPage,
     handleUpload,
     progress,
     flag,
     caption,
     setCaption,
-    UploadPostMutation,
     handlePost
 }) => {
-
     const { getRootProps, getInputProps } = useDropzone({ accept: "image/png, image/jpeg" })
+
+    useEffect(() => {
+        const scrolldown = () => {
+            if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+                setPage(page + 1);
+            }
+        };
+        window.addEventListener("scroll", scrolldown);
+        return () => window.removeEventListener("scroll", scrolldown)
+    }, [page, setPage])
     return (
         <S.Wrapper>
             <Header url={me.profilePhoto} />

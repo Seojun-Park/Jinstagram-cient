@@ -141,14 +141,13 @@ const HomeContainer: React.FC<IProps> = () => {
         return (
             <HomePresenter me={me}
                 posts={posts}
-                imageUrl={imageUrl}
                 flag={flag}
-                setImageUrl={setImageUrl}
                 progress={progress}
+                page={page}
+                setPage={setPage}
                 handleUpload={handleUpload}
                 caption={caption}
                 setCaption={setCaption}
-                UploadPostMutation={UploadPostMutation}
                 handlePost={handlePost}
             />
         )

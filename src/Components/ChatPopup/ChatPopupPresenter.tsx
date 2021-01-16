@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GET_CHAT } from '../../sharedquaries';
 import { GetChat } from '../../types/api'
 import * as S from './ChatPopupStyles'
@@ -21,6 +21,13 @@ const ChatPopupPresenter: React.FC<IProps> = ({ setPopup, me }) => {
             }
         }
     })
+    useEffect(() => {
+        const clicked = () => {
+            setPopup(false)
+        }
+        document.addEventListener("click", clicked);
+        return () => document.removeEventListener("click", clicked)
+    }, [setPopup])
     if (loading) {
         return (
             <>
@@ -29,7 +36,6 @@ const ChatPopupPresenter: React.FC<IProps> = ({ setPopup, me }) => {
         )
     }
     else {
-        console.log(chatList)
         return (
             <S.Container>
                 <S.Headbar>

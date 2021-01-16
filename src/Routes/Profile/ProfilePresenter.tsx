@@ -5,6 +5,7 @@ import { HeartFull, Message } from '../../Components/Icon'
 import PopUp from '../../Components/PopUp'
 import { userLogOut } from '../../Apollo/authResolvers'
 import ChatPopup from '../../Components/ChatPopup'
+import FollowPopup from '../../Components/FollowPopup'
 
 interface IProps {
     me: any
@@ -14,9 +15,13 @@ interface IProps {
     isMe: boolean
     popup: boolean
     setPopup: React.Dispatch<React.SetStateAction<boolean>>
+    followPopup: boolean
+    setFollowPopup: React.Dispatch<React.SetStateAction<boolean>>
     chatPopup: boolean
     setChatPopup: React.Dispatch<React.SetStateAction<boolean>>
     ChatHandler: any
+    action: string
+    setAction: React.Dispatch<React.SetStateAction<string>>
 }
 
 const ProfilePresenter: React.FC<IProps> = ({
@@ -27,10 +32,18 @@ const ProfilePresenter: React.FC<IProps> = ({
     isMe,
     popup,
     setPopup,
+    followPopup,
+    setFollowPopup,
     chatPopup,
     setChatPopup,
-    ChatHandler
+    ChatHandler,
+    action,
+    setAction
 }) => {
+    const handleFollowPopup = (action: string) => {
+        setAction(action)
+        setFollowPopup(true);
+    }
     return (
         <S.Wrapper>
             <Header url={me.profilePhoto} />
@@ -62,6 +75,29 @@ const ProfilePresenter: React.FC<IProps> = ({
                             <S.UserDetailRow>
                                 {user.email}
                             </S.UserDetailRow>
+                            <S.FollowRow>
+                                <S.Button onClick={() => handleFollowPopup("following")}>
+                                    <S.FollowCol>
+                                        <S.FollowTitle>
+                                            Following
+                                    </S.FollowTitle>
+                                        <S.FollowCount>
+                                            {user.followings ? user.followings.length : "0"}
+                                        </S.FollowCount>
+                                    </S.FollowCol>
+                                </S.Button>
+                                <S.Button onClick={() => handleFollowPopup("follower")}>
+                                    <S.FollowCol>
+                                        <S.FollowTitle>
+                                            Follower
+                                    </S.FollowTitle>
+                                        <S.FollowCount>
+                                            {user.followers ? user.followers.length : "0"}
+                                        </S.FollowCount>
+                                    </S.FollowCol>
+                                </S.Button>
+                                {action !== "" && followPopup && <FollowPopup setFollowPopup={setFollowPopup} user={user} action={action} />}
+                            </S.FollowRow>
                             <S.UserDetailRow>
                                 {isMe ? <S.FollowingButton onClick={() => setPopup(true)}>Setting</S.FollowingButton>
                                     :

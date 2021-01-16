@@ -44,6 +44,29 @@ export const UserDetailRow = styled.div`
   justify-content: flex-end;
   width: 180px;
 `;
+export const FollowRow = styled.div`
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 180px;
+`;
+
+export const FollowCol = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const FollowTitle = styled.span`
+  font-weight: 600;
+  font-size: 16px;
+`;
+
+export const FollowCount = styled.span`
+  font-size: 14px;
+`;
 
 export const Intro = styled.p`
   margin-left: 45px;
