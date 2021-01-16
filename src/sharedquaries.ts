@@ -46,6 +46,8 @@ export const SEE_USER = gql`
         followings {
           id
           user {
+            firstName
+            lastName
             username
             profilePhoto
           }
@@ -53,6 +55,8 @@ export const SEE_USER = gql`
         followers {
           id
           user {
+            firstName
+            lastName
             username
             profilePhoto
           }

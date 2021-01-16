@@ -26,7 +26,6 @@ const FollowPopupPresenter: React.FC<IProps> = ({ setFollowPopup, user, action }
             <S.PopupBody>
                 {action === "following" && (
                     user.followings && user.followings.map((user: any, index: number) => {
-                        console.log(user)
                         return (
                             <S.ExtendedLink key={index} to={`/profile/${user.username}`}>
                                 <S.ProfileImage src={user.profilePhoto} alt={"user"} />

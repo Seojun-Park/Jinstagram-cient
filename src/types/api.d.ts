@@ -540,6 +540,8 @@ export interface Me {
 
 export interface SeeUser_SeeUser_user_followings_user {
   __typename: "User";
+  firstName: string;
+  lastName: string;
   username: string;
   profilePhoto: string | null;
 }
@@ -552,6 +554,8 @@ export interface SeeUser_SeeUser_user_followings {
 
 export interface SeeUser_SeeUser_user_followers_user {
   __typename: "User";
+  firstName: string;
+  lastName: string;
   username: string;
   profilePhoto: string | null;
 }
