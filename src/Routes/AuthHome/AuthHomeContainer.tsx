@@ -94,7 +94,7 @@ const AuthHomeContainer = () => {
             const { ok, err } = RequestCode;
             if (ok) {
                 toast.success("Secret code sent to your email");
-                setTimeout(() => setAction("confirm"), 2000)
+                setTimeout(() => setAction("confirm"), 500);
             } else if (err) {
                 toast.error(err)
             }

@@ -79,6 +79,9 @@ const AuthHomePresenter: FC<IProps> = ({
     }
     const responseFromGoogle = (response: any): any => {
         const { email, familyName, givenName, googleId } = response.profileObj
+        if (email === undefined) {
+            console.log("err");
+        }
         setFirstName(givenName)
         setLastName(familyName)
         setGoogleId(googleId)
