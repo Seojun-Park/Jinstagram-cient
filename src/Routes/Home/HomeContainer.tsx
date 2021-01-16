@@ -119,8 +119,6 @@ const HomeContainer: React.FC<IProps> = () => {
         })
     }, [setLat, setLng])
 
-    console.log(me)
-
 
     useEffect(() => {
         if (lat !== 0 && lng !== 0) {

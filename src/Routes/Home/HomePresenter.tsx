@@ -60,11 +60,10 @@ const HomePresenter: React.FC<IProps> = ({
                             <S.Button onClick={() => handlePost()}>Upload</S.Button>}
                     </S.Row>
                 </S.Post>
-                {me.following === null ? "you don't follow anyone" : "so on"}
-                {console.log(me.following)}
-                {/* map method will be done on here */}
-                {posts && posts.map((post: any, index: number) => <FeedBox key={index} posts={post} />
-                )}
+                {me.followings && me.followings.length === 0 ? "you don't follow anyone" :
+                    posts && posts.map((post: any, index: number) => <FeedBox key={index} posts={post} />
+                    )
+                }
             </S.Container>
         </S.Wrapper >
     )
