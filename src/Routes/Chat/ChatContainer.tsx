@@ -31,6 +31,7 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
     const [messages, setMessages] = useState<any[]>()
     const [chat, setChat] = useState<any>()
     useQuery<Me>(ME, {
+        fetchPolicy: "network-only",
         onCompleted: ({ Me }) => {
             const { ok, err, user } = Me
             if (ok && user) {
@@ -41,12 +42,13 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
         }
     })
     const { loading } = useQuery<GetChatRoom, GetChatRoomVariables>(GET_CHAT_ROOM, {
+        fetchPolicy: "network-only",
         variables: {
             chatId: parseInt(chatId)
         },
         onCompleted: ({ GetChatRoom }) => {
             const { ok, err, chat } = GetChatRoom;
-            if (ok && chat) {
+            if (ok && chat && chat.messages) {
                 setChat(chat);
                 if (chat.messages) {
                     const messages = chat.messages.map(msg => {
