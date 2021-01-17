@@ -49,7 +49,7 @@ const authMiddle = new ApolloLink((operation: Operation, forward: any): any => {
 
 const subClient = new SubscriptionClient("ws://localhost:4000/subscription", {
   connectionParams: {
-    "Bearer": localStorage.getItem("Bearer") || ""
+    Bearer: localStorage.getItem("Bearer") || ""
   },
   reconnect: true
 });

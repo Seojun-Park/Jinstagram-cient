@@ -40,7 +40,8 @@ const ChatPresenter: React.FC<IProps> = ({
             <S.Container>
                 <S.Head>
                     <S.ExtendedLink to={`/profile/${chat.to.username}`}>
-                        <S.ProfileImage src={chat.to.profilePhoto} alt={"to"} />{chat.to.username}
+                        <S.ProfileImage src={me.id === chat.to.id ? chat.from.profilePhoto : chat.to.profilePhoto} alt={"to"} />
+                        To : {me.id === chat.to.id ? `${chat.from.username}` : `${chat.to.username}`}
                     </S.ExtendedLink>
                 </S.Head>
                 <S.MessageBox ref={ref}>{messages && renderMessage(messages)}</S.MessageBox>
