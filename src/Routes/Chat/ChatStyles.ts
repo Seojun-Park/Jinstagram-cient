@@ -32,8 +32,8 @@ export const Head = styled.div`
 `;
 
 export const MessageBox = styled.div`
-  min-height: 400px;
-  max-height: 500px;
+  height: 400px;
+  height: 400px;
   padding: 20px;
   overflow: scroll;
   display: flex;

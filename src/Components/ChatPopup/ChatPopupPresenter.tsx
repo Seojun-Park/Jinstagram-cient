@@ -32,15 +32,14 @@ const ChatPopupPresenter: React.FC<IProps> = ({ setPopup, me }) => {
                 </S.Headbar>
                 <S.PopupBody>
                     <S.ChatRow>
-
                         {me.chatFrom && me.chatFrom.length === 0 ? <S.ChatInfo>You haven't received any message yet</S.ChatInfo>
                             : me.chatFrom && me.chatFrom.map((chat: any, index: number) => {
                                 return (
                                     <S.ExtendedLink key={index} to={`/chat/${chat.id}`}>
                                         <S.Row>
-                                            <S.ProfileImage src={chat.from.profilePhoto} alt={"to"} />
+                                            <S.ProfileImage src={chat.to.profilePhoto} alt={"to"} />
                                             <S.SmallRow>
-                                                <S.RowUsername>To : {chat.username}</S.RowUsername>
+                                                <S.RowUsername>To : {chat.to.username}</S.RowUsername>
                                                 {chat.messages && chat.messages.length !== 0 ?
                                                     <S.RowMessage>{chat.messages[chat.messages.length - 1].user.username} : {chat.messages[chat.messages.length - 1].text}</S.RowMessage> :
                                                     <S.RowMessage>No message</S.RowMessage>
@@ -52,15 +51,14 @@ const ChatPopupPresenter: React.FC<IProps> = ({ setPopup, me }) => {
                             })}
                     </S.ChatRow>
                     <S.ChatRow>
-
                         {me.chatTo && me.chatTo.length === 0 ? <S.ChatInfo>You haven't sent any message yet</S.ChatInfo>
                             : me.chatTo && me.chatTo.map((chat: any, index: number) => {
                                 return (
                                     <S.ExtendedLink key={index} to={`/chat/${chat.id}`}>
                                         <S.Row>
-                                            <S.ProfileImage src={chat.to.profilePhoto} alt={"to"} />
+                                            <S.ProfileImage src={chat.from.profilePhoto} alt={"to"} />
                                             <S.SmallRow>
-                                                <S.RowUsername>From : {chat.username}</S.RowUsername>
+                                                <S.RowUsername>From : {chat.from.username}</S.RowUsername>
                                                 {chat.messages && chat.messages.length !== 0 ?
                                                     <S.RowMessage>{chat.messages[chat.messages.length - 1].user.username} : {chat.messages[chat.messages.length - 1].text}</S.RowMessage> :
                                                     <S.RowMessage>No message</S.RowMessage>

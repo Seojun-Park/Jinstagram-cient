@@ -20,6 +20,7 @@ export const Post = styled.div`
   height: 120px;
   border-radius: 4px;
   max-width: 470px;
+  margin-bottom: 25px;
 `;
 
 export const Textarea = styled(TextareaAutosize)`
