@@ -51,6 +51,7 @@ export const PopupBody = styled.div`
 `;
 
 export const Row = styled.div`
+  width: 100%;
   padding: 8px 0;
   padding-left: 15px;
   display: flex;
@@ -63,62 +64,11 @@ export const Row = styled.div`
   }
 `;
 
-export const Input = styled.input`
-  padding: 12px 12px;
-  width: 300px;
-  border-radius: 4px;
-  border: none;
-  background-color: #e6e6e6;
-`;
-
-export const PopUpBottom = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const Button = styled.div`
-  margin-top: 15px;
-  width: 100px;
-  padding: 10px 0;
-  border-radius: 4px;
-  border: none;
-  background-color: #3498db;
-  color: white;
-  text-align: center;
-  align-items: center;
-  cursor: pointer;
-  &:hover {
-    background-color: #2980b9;
-    transition: 0.2s linear;
-  }
-`;
-
-export const UploadDiv = styled.div`
-  width: 80%;
-  margin: 0 auto;
-  border: 3px solid #eee;
-  border-radius: 4px;
-  height: 100px;
-  text-align: center;
-  margin-bottom: 25px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-`;
-
 export const ProfileImage = styled.img`
   width: 50px;
   height: 50px;
   object-fit: cover;
   border-radius: 10rem;
-`;
-
-export const SmallRow = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 export const RowUsername = styled.span`
@@ -127,11 +77,10 @@ export const RowUsername = styled.span`
   color: black;
 `;
 
-export const RowMessage = styled.span`
-  padding-left: 35px;
-  color: #ccc;
-`;
-
 export const ExtendedLink = styled(Link)`
   text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
 `;

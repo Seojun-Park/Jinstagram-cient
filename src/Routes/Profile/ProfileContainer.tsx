@@ -64,6 +64,7 @@ const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
                 const { ok, err } = ToggleFollowing;
                 if (ok) {
                     setFollowingS(followingS ? false : true)
+                    window.location.reload()
                 } else {
                     console.log(err);
                 }

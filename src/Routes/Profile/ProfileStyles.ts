@@ -44,11 +44,13 @@ export const UserDetailRow = styled.div`
   justify-content: flex-end;
   width: 180px;
 `;
+
 export const FollowRow = styled.div`
   margin-bottom: 8px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  padding: 10px 0;
+  justify-content: center;
   width: 180px;
 `;
 

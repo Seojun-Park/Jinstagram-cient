@@ -538,6 +538,7 @@ export interface SeeUser_SeeUser_user_followers {
   id: number;
   username: string;
   firstName: string;
+  profilePhoto: string | null;
   lastName: string;
 }
 

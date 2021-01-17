@@ -44,7 +44,6 @@ const ProfilePresenter: React.FC<IProps> = ({
         setAction(action)
         setFollowPopup(true);
     }
-    console.log(user)
     return (
         <S.Wrapper>
             <Header url={me.profilePhoto} />
@@ -77,16 +76,6 @@ const ProfilePresenter: React.FC<IProps> = ({
                                 {user.email}
                             </S.UserDetailRow>
                             <S.FollowRow>
-                                <S.Button onClick={() => handleFollowPopup("following")}>
-                                    <S.FollowCol>
-                                        <S.FollowTitle>
-                                            Following
-                                    </S.FollowTitle>
-                                        <S.FollowCount>
-                                            {user.following ? user.following.length : "0"}
-                                        </S.FollowCount>
-                                    </S.FollowCol>
-                                </S.Button>
                                 <S.Button onClick={() => handleFollowPopup("follower")}>
                                     <S.FollowCol>
                                         <S.FollowTitle>

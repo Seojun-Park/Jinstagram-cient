@@ -45,6 +45,7 @@ export const SEE_USER = gql`
           id
           username
           firstName
+          profilePhoto
           lastName
         }
         posts {
