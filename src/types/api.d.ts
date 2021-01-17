@@ -229,12 +229,14 @@ export interface GetChatRoom_GetChatRoom_chat_from {
   __typename: "User";
   id: number;
   username: string;
+  profilePhoto: string | null;
 }
 
 export interface GetChatRoom_GetChatRoom_chat_to {
   __typename: "User";
   id: number;
   username: string;
+  profilePhoto: string | null;
 }
 
 export interface GetChatRoom_GetChatRoom_chat_messages_user {
@@ -488,6 +490,31 @@ export interface CreateChatVariables {
 // GraphQL query operation: Me
 // ====================================================
 
+export interface Me_Me_user_chatTo_to {
+  __typename: "User";
+  id: number;
+  username: string;
+  profilePhoto: string | null;
+}
+
+export interface Me_Me_user_chatTo_messages_user {
+  __typename: "User";
+  username: string;
+}
+
+export interface Me_Me_user_chatTo_messages {
+  __typename: "Message";
+  text: string;
+  user: Me_Me_user_chatTo_messages_user;
+}
+
+export interface Me_Me_user_chatTo {
+  __typename: "Chat";
+  id: number;
+  to: Me_Me_user_chatTo_to | null;
+  messages: (Me_Me_user_chatTo_messages | null)[] | null;
+}
+
 export interface Me_Me_user_posts {
   __typename: "Post";
   id: number;
@@ -502,6 +529,7 @@ export interface Me_Me_user {
   lastName: string;
   username: string;
   intro: string | null;
+  chatTo: (Me_Me_user_chatTo | null)[] | null;
   posts: (Me_Me_user_posts | null)[] | null;
 }
 

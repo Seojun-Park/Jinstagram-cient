@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Form from "../../Components/Form";
 
@@ -14,17 +15,20 @@ export const Wrapper = styled.div``;
 export const Container = styled.div`
   width: 70%;
   min-width: 650px;
-  min-height: 600px;
+  min-height: 500px;
   margin: 0 auto;
+  margin-top: 50px;
   border: 1px solid #ccc;
 `;
 export const Head = styled.div`
-  height: 30px;
+  height: 50px;
   display: flex;
   align-items: center;
   padding: 10px 25px;
   border-bottom: 3px solid #ccc;
   margin: 0 auto;
+  font-size: 16px;
+  font-weight: 600;
 `;
 
 export const MessageBox = styled.div`
@@ -66,4 +70,28 @@ export const SendButton = styled.button`
   }
 `;
 
-export const ExtendedForm = styled(Form)``;
+export const MessageBoxBottom = styled.div`
+  height: 70px;
+  margin: auto auto;
+`;
+
+export const ExtendedForm = styled(Form)`
+  width: 100%;
+`;
+
+export const ExtendedLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const ProfileImage = styled.img`
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 10rem;
+  margin-right: 25px;
+`;

@@ -13,6 +13,20 @@ export const ME = gql`
         lastName
         username
         intro
+        chatTo {
+          id
+          to {
+            id
+            username
+            profilePhoto
+          }
+          messages {
+            text
+            user {
+              username
+            }
+          }
+        }
         posts {
           id
         }

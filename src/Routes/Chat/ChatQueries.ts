@@ -10,10 +10,12 @@ export const GET_CHAT_ROOM = gql`
         from {
           id
           username
+          profilePhoto
         }
         to {
           id
           username
+          profilePhoto
         }
         messages {
           id

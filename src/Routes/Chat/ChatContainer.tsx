@@ -30,6 +30,7 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
     const [message, onChangeMessage, setMessage] = useInput("")
     const [messages, setMessages] = useState<any[]>()
     const [chat, setChat] = useState<any>()
+    console.log(chat)
     useQuery<Me>(ME, {
         onCompleted: ({ Me }) => {
             const { ok, err, user } = Me
@@ -75,7 +76,7 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
         },
         onSubscriptionData: ({ subscriptionData }) => {
             const { data } = subscriptionData;
-            console.log(subscriptionData, data)
+            console.log("subData", subscriptionData, "normal data:", data)
             if (data && messages && me) {
                 setMessage("");
                 const { MessageSubscription } = data;
@@ -113,6 +114,7 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
     } else {
         return (
             <ChatPresenter
+                chat={chat}
                 me={me}
                 messages={messages}
                 message={message}

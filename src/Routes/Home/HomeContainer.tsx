@@ -111,12 +111,16 @@ const HomeContainer: React.FC<IProps> = () => {
     }, [flag, me, images])
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition((pos) => {
-            if (pos && pos.coords) {
-                setLat(pos.coords.latitude);
-                setLng(pos.coords.longitude)
-            }
-        })
+        const getLocation = () => {
+            navigator.geolocation.getCurrentPosition((pos) => {
+                if (pos && pos.coords) {
+                    setLat(pos.coords.latitude);
+                    setLng(pos.coords.longitude)
+                }
+            })
+        }
+        let getLocationInterval = setInterval(getLocation, 500);
+        return () => clearInterval(getLocationInterval)
     }, [setLat, setLng])
 
 

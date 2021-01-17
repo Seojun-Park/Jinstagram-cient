@@ -10,17 +10,18 @@ interface IProps {
 }
 
 const ChatPopupPresenter: React.FC<IProps> = ({ setPopup, me }) => {
-    const [chatList, setChatList] = useState<any>();
-    const { loading } = useQuery<GetChat>(GET_CHAT, {
-        onCompleted: ({ GetChat }) => {
-            const { ok, err, chat } = GetChat;
-            if (ok && chat) {
-                setChatList(chat)
-            } else {
-                console.log(err)
-            }
-        }
-    })
+    console.log(me)
+    // const [chatList, setChatList] = useState<any>();
+    // const { loading } = useQuery<GetChat>(GET_CHAT, {
+    //     onCompleted: ({ GetChat }) => {
+    //         const { ok, err, chat } = GetChat;
+    //         if (ok && chat) {
+    //             setChatList(chat)
+    //         } else {
+    //             console.log(err)
+    //         }
+    //     }
+    // })
     useEffect(() => {
         const clicked = () => {
             setPopup(false)
@@ -28,7 +29,7 @@ const ChatPopupPresenter: React.FC<IProps> = ({ setPopup, me }) => {
         document.addEventListener("click", clicked);
         return () => document.removeEventListener("click", clicked)
     }, [setPopup])
-    if (loading) {
+    if (!me) {
         return (
             <>
                 loading
@@ -44,10 +45,9 @@ const ChatPopupPresenter: React.FC<IProps> = ({ setPopup, me }) => {
                     <S.Title>Chat List</S.Title>
                     <S.ExitButton onClick={() => setPopup(false)}>X</S.ExitButton>
                 </S.Headbar>
-
                 <S.PopupBody>
-                    {chatList && chatList.length === 0 ? "You don't have any chats"
-                        : chatList && chatList.map((chat: any, index: number) => {
+                    {me.chatTo && me.chatTo.length === 0 ? "You don't have any chats"
+                        : me.chatTo && me.chatTo.map((chat: any, index: number) => {
                             return (
                                 <S.ExtendedLink key={index} to={`/chat/${chat.id}`}>
                                     <S.Row>

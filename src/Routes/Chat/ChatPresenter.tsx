@@ -4,6 +4,7 @@ import Header from '../../Components/Header'
 import * as S from './ChatStyles'
 
 interface IProps {
+    chat: any
     me: any
     messages?: any[]
     message: string
@@ -18,7 +19,9 @@ const renderMessage = (messages: any[]) => {
     })
 }
 
-const ChatPresenter: React.FC<IProps> = ({ me,
+const ChatPresenter: React.FC<IProps> = ({
+    chat,
+    me,
     messages,
     message,
     onChangeMessage,
@@ -35,15 +38,21 @@ const ChatPresenter: React.FC<IProps> = ({ me,
         <S.Wrapper>
             <Header url={me.profilePhoto} />
             <S.Container>
-                <S.Head>Chat with oo</S.Head>
+                <S.Head>
+                    <S.ExtendedLink to={`/profile/${chat.to.username}`}>
+                        <S.ProfileImage src={chat.to.profilePhoto} alt={"to"} />{chat.to.username}
+                    </S.ExtendedLink>
+                </S.Head>
                 <S.MessageBox ref={ref}>{messages && renderMessage(messages)}</S.MessageBox>
-                <S.ExtendedForm submitFn={SendMessageMutation}>
-                    <S.MessageInput
-                        placeholder="Type message"
-                        value={message}
-                        onChange={onChangeMessage}
-                    />
-                </S.ExtendedForm>
+                <S.MessageBoxBottom>
+                    <S.ExtendedForm submitFn={SendMessageMutation}>
+                        <S.MessageInput
+                            placeholder="Type message"
+                            value={message}
+                            onChange={onChangeMessage}
+                        />
+                    </S.ExtendedForm>
+                </S.MessageBoxBottom>
             </S.Container>
         </S.Wrapper>
     )
