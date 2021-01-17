@@ -1,7 +1,4 @@
-import { useQuery } from '@apollo/client';
-import React, { useEffect, useState } from 'react';
-import { GET_CHAT } from '../../sharedquaries';
-import { GetChat } from '../../types/api'
+import React, { useEffect } from 'react';
 import * as S from './ChatPopupStyles'
 
 interface IProps {
@@ -10,18 +7,6 @@ interface IProps {
 }
 
 const ChatPopupPresenter: React.FC<IProps> = ({ setPopup, me }) => {
-    console.log(me)
-    // const [chatList, setChatList] = useState<any>();
-    // const { loading } = useQuery<GetChat>(GET_CHAT, {
-    //     onCompleted: ({ GetChat }) => {
-    //         const { ok, err, chat } = GetChat;
-    //         if (ok && chat) {
-    //             setChatList(chat)
-    //         } else {
-    //             console.log(err)
-    //         }
-    //     }
-    // })
     useEffect(() => {
         const clicked = () => {
             setPopup(false)
@@ -46,23 +31,46 @@ const ChatPopupPresenter: React.FC<IProps> = ({ setPopup, me }) => {
                     <S.ExitButton onClick={() => setPopup(false)}>X</S.ExitButton>
                 </S.Headbar>
                 <S.PopupBody>
-                    {me.chatTo && me.chatTo.length === 0 ? "You don't have any chats"
-                        : me.chatTo && me.chatTo.map((chat: any, index: number) => {
-                            return (
-                                <S.ExtendedLink key={index} to={`/chat/${chat.id}`}>
-                                    <S.Row>
-                                        <S.ProfileImage src={chat.to.profilePhoto} alt={"to"} />
-                                        <S.SmallRow>
-                                            <S.RowUsername>To : {chat.to.username}</S.RowUsername>
-                                            {chat.messages && chat.messages.length !== 0 ?
-                                                <S.RowMessage>{chat.messages[chat.messages.length - 1].user.username} : {chat.messages[chat.messages.length - 1].text}</S.RowMessage> :
-                                                <S.RowMessage>No message</S.RowMessage>
-                                            }
-                                        </S.SmallRow>
-                                    </S.Row>
-                                </S.ExtendedLink>
-                            )
-                        })}
+                    <S.ChatRow>
+
+                        {me.chatFrom && me.chatFrom.length === 0 ? <S.ChatInfo>You haven't received any message yet</S.ChatInfo>
+                            : me.chatFrom && me.chatFrom.map((chat: any, index: number) => {
+                                return (
+                                    <S.ExtendedLink key={index} to={`/chat/${chat.id}`}>
+                                        <S.Row>
+                                            <S.ProfileImage src={chat.from.profilePhoto} alt={"to"} />
+                                            <S.SmallRow>
+                                                <S.RowUsername>To : {chat.username}</S.RowUsername>
+                                                {chat.messages && chat.messages.length !== 0 ?
+                                                    <S.RowMessage>{chat.messages[chat.messages.length - 1].user.username} : {chat.messages[chat.messages.length - 1].text}</S.RowMessage> :
+                                                    <S.RowMessage>No message</S.RowMessage>
+                                                }
+                                            </S.SmallRow>
+                                        </S.Row>
+                                    </S.ExtendedLink>
+                                )
+                            })}
+                    </S.ChatRow>
+                    <S.ChatRow>
+
+                        {me.chatTo && me.chatTo.length === 0 ? <S.ChatInfo>You haven't sent any message yet</S.ChatInfo>
+                            : me.chatTo && me.chatTo.map((chat: any, index: number) => {
+                                return (
+                                    <S.ExtendedLink key={index} to={`/chat/${chat.id}`}>
+                                        <S.Row>
+                                            <S.ProfileImage src={chat.to.profilePhoto} alt={"to"} />
+                                            <S.SmallRow>
+                                                <S.RowUsername>From : {chat.username}</S.RowUsername>
+                                                {chat.messages && chat.messages.length !== 0 ?
+                                                    <S.RowMessage>{chat.messages[chat.messages.length - 1].user.username} : {chat.messages[chat.messages.length - 1].text}</S.RowMessage> :
+                                                    <S.RowMessage>No message</S.RowMessage>
+                                                }
+                                            </S.SmallRow>
+                                        </S.Row>
+                                    </S.ExtendedLink>
+                                )
+                            })}
+                    </S.ChatRow>
                 </S.PopupBody>
             </S.Container>
         )

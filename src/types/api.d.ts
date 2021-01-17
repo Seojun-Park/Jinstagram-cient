@@ -497,6 +497,13 @@ export interface Me_Me_user_chatTo_to {
   profilePhoto: string | null;
 }
 
+export interface Me_Me_user_chatTo_from {
+  __typename: "User";
+  id: number;
+  username: string;
+  profilePhoto: string | null;
+}
+
 export interface Me_Me_user_chatTo_messages_user {
   __typename: "User";
   username: string;
@@ -512,7 +519,41 @@ export interface Me_Me_user_chatTo {
   __typename: "Chat";
   id: number;
   to: Me_Me_user_chatTo_to | null;
+  from: Me_Me_user_chatTo_from | null;
   messages: (Me_Me_user_chatTo_messages | null)[] | null;
+}
+
+export interface Me_Me_user_chatFrom_to {
+  __typename: "User";
+  id: number;
+  username: string;
+  profilePhoto: string | null;
+}
+
+export interface Me_Me_user_chatFrom_from {
+  __typename: "User";
+  id: number;
+  username: string;
+  profilePhoto: string | null;
+}
+
+export interface Me_Me_user_chatFrom_messages_user {
+  __typename: "User";
+  username: string;
+}
+
+export interface Me_Me_user_chatFrom_messages {
+  __typename: "Message";
+  text: string;
+  user: Me_Me_user_chatFrom_messages_user;
+}
+
+export interface Me_Me_user_chatFrom {
+  __typename: "Chat";
+  id: number;
+  to: Me_Me_user_chatFrom_to | null;
+  from: Me_Me_user_chatFrom_from | null;
+  messages: (Me_Me_user_chatFrom_messages | null)[] | null;
 }
 
 export interface Me_Me_user_posts {
@@ -530,6 +571,7 @@ export interface Me_Me_user {
   username: string;
   intro: string | null;
   chatTo: (Me_Me_user_chatTo | null)[] | null;
+  chatFrom: (Me_Me_user_chatFrom | null)[] | null;
   posts: (Me_Me_user_posts | null)[] | null;
 }
 

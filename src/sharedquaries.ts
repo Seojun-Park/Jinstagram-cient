@@ -20,6 +20,30 @@ export const ME = gql`
             username
             profilePhoto
           }
+          from {
+            id
+            username
+            profilePhoto
+          }
+          messages {
+            text
+            user {
+              username
+            }
+          }
+        }
+        chatFrom {
+          id
+          to {
+            id
+            username
+            profilePhoto
+          }
+          from {
+            id
+            username
+            profilePhoto
+          }
           messages {
             text
             user {

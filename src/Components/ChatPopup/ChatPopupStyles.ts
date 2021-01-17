@@ -133,3 +133,18 @@ export const RowMessage = styled.span`
 export const ExtendedLink = styled(Link)`
   text-decoration: none;
 `;
+
+export const ChatRow = styled.div`
+  &:not(:last-child) {
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ccc;
+  }
+`;
+
+export const ChatInfo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  font-size: 20px;
+`;

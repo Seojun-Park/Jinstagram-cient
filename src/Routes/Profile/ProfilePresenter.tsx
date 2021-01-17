@@ -44,6 +44,7 @@ const ProfilePresenter: React.FC<IProps> = ({
         setAction(action)
         setFollowPopup(true);
     }
+    console.log(me)
     return (
         <S.Wrapper>
             <Header url={me.profilePhoto} />
