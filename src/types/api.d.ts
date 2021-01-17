@@ -24,6 +24,7 @@ export interface ToggleLike_ToggleLike {
   __typename: "ToggleLikeResponse";
   ok: boolean;
   err: string | null;
+  ret: string | null;
 }
 
 export interface ToggleLike {
@@ -55,6 +56,72 @@ export interface AddComment {
 
 export interface AddCommentVariables {
   text: string;
+  postId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetPost
+// ====================================================
+
+export interface GetPost_GetPost_post_likes {
+  __typename: "Like";
+  id: number;
+  userId: number | null;
+}
+
+export interface GetPost_GetPost_post {
+  __typename: "Post";
+  id: number;
+  likes: (GetPost_GetPost_post_likes | null)[] | null;
+}
+
+export interface GetPost_GetPost {
+  __typename: "GetPostResponse";
+  ok: boolean;
+  err: string | null;
+  post: GetPost_GetPost_post | null;
+}
+
+export interface GetPost {
+  GetPost: GetPost_GetPost;
+}
+
+export interface GetPostVariables {
+  postId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetLike
+// ====================================================
+
+export interface GetLike_GetLike_likes {
+  __typename: "Like";
+  id: number;
+  userId: number | null;
+}
+
+export interface GetLike_GetLike {
+  __typename: "GetLikeResponse";
+  ok: boolean;
+  err: string | null;
+  likes: (GetLike_GetLike_likes | null)[] | null;
+}
+
+export interface GetLike {
+  GetLike: GetLike_GetLike;
+}
+
+export interface GetLikeVariables {
   postId: number;
 }
 

@@ -67,7 +67,7 @@ const HomePresenter: React.FC<IProps> = ({
                             <S.Button onClick={() => handlePost()}>Upload</S.Button>}
                     </S.Row>
                 </S.Post>
-                {posts && posts.map((post: any, index: number) => <FeedBox key={index} posts={post} />)}
+                {posts && posts.map((post: any, index: number) => <FeedBox key={index} posts={post} me={me} />)}
             </S.Container>
         </S.Wrapper >
     )
