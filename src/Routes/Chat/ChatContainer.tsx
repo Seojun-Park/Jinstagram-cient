@@ -30,7 +30,6 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
     const [message, onChangeMessage, setMessage] = useInput("")
     const [messages, setMessages] = useState<any[]>()
     const [chat, setChat] = useState<any>()
-    console.log(chat)
     useQuery<Me>(ME, {
         onCompleted: ({ Me }) => {
             const { ok, err, user } = Me
@@ -51,7 +50,7 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
                 setChat(chat);
                 if (chat.messages) {
                     const messages = chat.messages.map(msg => {
-                        if (msg) {
+                        if (me && me.id && msg && msg.user && msg.user.id) {
                             return {
                                 ...msg,
                                 mine: me.id === msg.user.id
@@ -94,15 +93,16 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
         variables: {
             text: message,
             chatId: parseInt(chatId)
-        },
-        onCompleted: ({ SendMessage }) => {
-            const { ok, err } = SendMessage;
-            if (ok) {
-                setMessage("")
-            } else {
-                console.log(err)
-            }
         }
+        // ,
+        // onCompleted: ({ SendMessage }) => {
+        //     const { ok, err } = SendMessage;
+        //     if (ok) {
+        //         setMessage("")
+        //     } else {
+        //         console.log(err)
+        //     }
+        // }
     })
 
     if (loading || !me || !chat) {
