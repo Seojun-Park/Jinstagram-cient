@@ -86,13 +86,13 @@ const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
     const FollowingHandler = (username: string) => {
         ToggleFollowingMutation({
             variables: {
-                username
+                username,
+                action: followingS ? "UNFOLLOW" : "FOLLOW"
             },
         })
     }
 
     const ChatHandler = async () => {
-        console.log("came")
         await CreateChatMutation({
             variables: {
                 toId: user.id

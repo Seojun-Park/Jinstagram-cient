@@ -83,7 +83,7 @@ const ProfilePresenter: React.FC<IProps> = ({
                                             Following
                                     </S.FollowTitle>
                                         <S.FollowCount>
-                                            {user.followings ? user.followings.length : "0"}
+                                            {user.following ? user.following.length : "0"}
                                         </S.FollowCount>
                                     </S.FollowCol>
                                 </S.Button>

@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const TOGGLE_FOLLOWING = gql`
-  mutation ToggleFollowing($username: String!) {
-    ToggleFollowing(username: $username) {
+  mutation ToggleFollowing($username: String!, $action: String!) {
+    ToggleFollowing(username: $username, action: $action) {
       ok
       err
     }

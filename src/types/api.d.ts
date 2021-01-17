@@ -447,6 +447,7 @@ export interface ToggleFollowing {
 
 export interface ToggleFollowingVariables {
   username: string;
+  action: string;
 }
 
 /* tslint:disable */
@@ -487,18 +488,6 @@ export interface CreateChatVariables {
 // GraphQL query operation: Me
 // ====================================================
 
-export interface Me_Me_user_followings {
-  __typename: "Following";
-  id: number;
-  userId: number | null;
-}
-
-export interface Me_Me_user_followers {
-  __typename: "Follower";
-  id: number;
-  userId: number | null;
-}
-
 export interface Me_Me_user_posts {
   __typename: "Post";
   id: number;
@@ -513,8 +502,6 @@ export interface Me_Me_user {
   lastName: string;
   username: string;
   intro: string | null;
-  followings: (Me_Me_user_followings | null)[] | null;
-  followers: (Me_Me_user_followers | null)[] | null;
   posts: (Me_Me_user_posts | null)[] | null;
 }
 
@@ -538,32 +525,20 @@ export interface Me {
 // GraphQL query operation: SeeUser
 // ====================================================
 
-export interface SeeUser_SeeUser_user_followings_user {
+export interface SeeUser_SeeUser_user_following {
   __typename: "User";
-  firstName: string;
-  lastName: string;
-  username: string;
-  profilePhoto: string | null;
-}
-
-export interface SeeUser_SeeUser_user_followings {
-  __typename: "Following";
   id: number;
-  user: SeeUser_SeeUser_user_followings_user;
-}
-
-export interface SeeUser_SeeUser_user_followers_user {
-  __typename: "User";
+  username: string;
   firstName: string;
   lastName: string;
-  username: string;
-  profilePhoto: string | null;
 }
 
 export interface SeeUser_SeeUser_user_followers {
-  __typename: "Follower";
+  __typename: "User";
   id: number;
-  user: SeeUser_SeeUser_user_followers_user;
+  username: string;
+  firstName: string;
+  lastName: string;
 }
 
 export interface SeeUser_SeeUser_user_posts_images {
@@ -599,7 +574,7 @@ export interface SeeUser_SeeUser_user {
   username: string;
   isFollowing: boolean | null;
   intro: string | null;
-  followings: (SeeUser_SeeUser_user_followings | null)[] | null;
+  following: (SeeUser_SeeUser_user_following | null)[] | null;
   followers: (SeeUser_SeeUser_user_followers | null)[] | null;
   posts: (SeeUser_SeeUser_user_posts | null)[] | null;
   comments: (SeeUser_SeeUser_user_comments | null)[] | null;
