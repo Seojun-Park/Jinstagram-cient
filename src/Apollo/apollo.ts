@@ -12,9 +12,7 @@ import {
 } from "@apollo/client";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { onError } from "@apollo/client/link/error";
-// import { SubscriptionClient } from "subscriptions-transport-ws";
 import { getMainDefinition } from "@apollo/client/utilities";
-import { SubscriptionClient } from "subscriptions-transport-ws";
 
 const typeDefs = gql`
   extend type Query {
@@ -47,18 +45,11 @@ const authMiddle = new ApolloLink((operation: Operation, forward: any): any => {
   return forward(operation);
 });
 
-// const subClient = new SubscriptionClient("ws://localhost:4000/subscription", {
-//   connectionParams: {
-//     Bearer: localStorage.getItem("Bearer") || ""
-//   },
-//   reconnect: true
-// });
-
-// const wsLink = new WebSocketLink(subClient);
 const wsLink = new WebSocketLink({
   uri: "ws://localhost:4000/subscription",
   options: {
     reconnect: true,
+    lazy: true,
     connectionParams: {
       Bearer: localStorage.getItem("Bearer") || ""
     }

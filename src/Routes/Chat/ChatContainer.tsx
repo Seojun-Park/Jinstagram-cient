@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useSubscription } from '@apollo/client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import Loader from '../../Components/Loader';
 import useInput from '../../Hooks/useInput';
@@ -41,7 +41,7 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
             }
         }
     })
-    const { loading } = useQuery<GetChatRoom, GetChatRoomVariables>(GET_CHAT_ROOM, {
+    const { loading, subscribeToMore } = useQuery<GetChatRoom, GetChatRoomVariables>(GET_CHAT_ROOM, {
         fetchPolicy: "network-only",
         variables: {
             chatId: parseInt(chatId)
@@ -71,6 +71,16 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
         }
     })
 
+    useEffect(() => {
+        subscribeToMore({
+            document: MESSAGE_SUBSCRIPTION,
+            updateQuery: (prev, { subscriptionData }) => {
+                if (!subscriptionData.data) return prev;
+                return { ...prev }
+            }
+        })
+    }, [subscribeToMore])
+
     useSubscription<MessageSubscription>(MESSAGE_SUBSCRIPTION, {
         fetchPolicy: "network-only",
         onSubscriptionComplete: () => {
@@ -78,7 +88,6 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
         },
         onSubscriptionData: ({ subscriptionData }) => {
             const { data } = subscriptionData;
-            console.log("subData", subscriptionData, "data:", data)
             if (data && messages && me) {
                 const { MessageSubscription } = data;
                 if (MessageSubscription) {
