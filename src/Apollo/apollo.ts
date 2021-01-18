@@ -47,14 +47,23 @@ const authMiddle = new ApolloLink((operation: Operation, forward: any): any => {
   return forward(operation);
 });
 
-const subClient = new SubscriptionClient("ws://localhost:4000/subscription", {
-  connectionParams: {
-    Bearer: localStorage.getItem("Bearer") || ""
-  },
-  reconnect: true
-});
+// const subClient = new SubscriptionClient("ws://localhost:4000/subscription", {
+//   connectionParams: {
+//     Bearer: localStorage.getItem("Bearer") || ""
+//   },
+//   reconnect: true
+// });
 
-const wsLink = new WebSocketLink(subClient);
+// const wsLink = new WebSocketLink(subClient);
+const wsLink = new WebSocketLink({
+  uri: "ws://localhost:4000/subscription",
+  options: {
+    reconnect: true,
+    connectionParams: {
+      Bearer: localStorage.getItem("Bearer") || ""
+    }
+  }
+});
 
 const httpLink = new HttpLink({
   uri: "http://localhost:4000/graphql"

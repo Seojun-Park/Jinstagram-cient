@@ -71,7 +71,8 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
         }
     })
 
-    const { data } = useSubscription<MessageSubscription>(MESSAGE_SUBSCRIPTION, {
+    useSubscription<MessageSubscription>(MESSAGE_SUBSCRIPTION, {
+        fetchPolicy: "network-only",
         onSubscriptionComplete: () => {
             console.log("Listening new messages");
         },
@@ -79,7 +80,6 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
             const { data } = subscriptionData;
             console.log("subData", subscriptionData, "data:", data)
             if (data && messages && me) {
-                setMessage("");
                 const { MessageSubscription } = data;
                 if (MessageSubscription) {
                     setMessages([...messages, {
@@ -91,12 +91,23 @@ const ChatContainer: React.FC<IProps> = ({ match: { params } }) => {
         }
     })
 
-    console.log(data)
-
     const [SendMessageMutation] = useMutation<SendMessage, SendMessageVariables>(SEND_MESSAGE, {
         variables: {
             text: message,
             chatId: parseInt(chatId)
+        },
+        onCompleted: ({ SendMessage }) => {
+            // console.log(SendMessage)
+            const { ok, err, message } = SendMessage;
+            if (ok) {
+                setMessage("")
+                setMessages([...(messages as any[]), {
+                    ...message,
+                    mine: true
+                }])
+            } else {
+                console.log(err)
+            }
         }
     })
 
