@@ -10,14 +10,14 @@ const LoggedInRoutes = () => (
         <Route exact path="/" component={Home} />
         <Route path="/profile/:username" component={Profile} />
         <Route path="/chat/:chatId" component={Chat} />
-        <Redirect from="*" to="/" />
+        {/* <Redirect from="*" to="/" /> */}
     </Switch>
 )
 
 const LoggedOutRoutes = () => (
     <Switch>
         <Route exact path="/" component={AuthHome} />
-        <Redirect from="*" to="/" />
+        {/* <Redirect from="*" to="/" /> */}
     </Switch>
 )
 
