@@ -23,7 +23,7 @@ const LoggedOutRoutes = () => (
 
 const AppRouter = ({ isLoggedIn }: any) => {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename={"/Jinstagram-client/"}>
             {isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}
         </BrowserRouter>
     )
