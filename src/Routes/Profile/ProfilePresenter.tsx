@@ -9,6 +9,7 @@ import FollowPopup from '../../Components/FollowPopup'
 
 interface IProps {
     me: any
+    refetch: any
     user: any
     FollowingHandler: (username: string) => void
     followingS: boolean | null | undefined
@@ -26,6 +27,7 @@ interface IProps {
 
 const ProfilePresenter: React.FC<IProps> = ({
     me,
+    refetch,
     user,
     FollowingHandler,
     followingS,
@@ -94,7 +96,7 @@ const ProfilePresenter: React.FC<IProps> = ({
                                     :
                                     <S.FollowingButton onClick={() => FollowingHandler(user.username)}>{followingS ? "UNFOLLOW" : "FOLLOW"}</S.FollowingButton>
                                 }
-                                {popup && <PopUp setPopup={setPopup} me={me} />}
+                                {popup && <PopUp setPopup={setPopup} me={me} refetch={refetch} />}
                             </S.UserDetailRow>
                         </S.UserDetailCol>
                     </S.Row>

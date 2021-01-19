@@ -14,9 +14,10 @@ import { toast } from 'react-toastify';
 interface IProps {
     setPopup: React.Dispatch<React.SetStateAction<boolean>>
     me: any
+    refetch: any
 }
 
-const PopUpPresenter: React.FC<IProps> = ({ setPopup, me }) => {
+const PopUpPresenter: React.FC<IProps> = ({ setPopup, me, refetch }) => {
     const [image, setImage] = useState<any>();
     const [flag, setFlag] = useState<boolean>(false);
     const [progress, setProgress] = useState<number>(0)
@@ -39,7 +40,8 @@ const PopUpPresenter: React.FC<IProps> = ({ setPopup, me }) => {
             if (ok) {
                 toast.success("User Data edited")
                 setPopup(false);
-                window.location.reload();
+                refetch();
+                // window.location.reload();
             } else {
                 console.log(err)
             }

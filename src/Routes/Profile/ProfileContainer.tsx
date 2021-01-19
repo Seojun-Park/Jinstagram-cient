@@ -41,7 +41,7 @@ const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
             }
         }
     })
-    const { loading } = useQuery<SeeUser, SeeUserVariables>(SEE_USER, {
+    const { loading, refetch } = useQuery<SeeUser, SeeUserVariables>(SEE_USER, {
         variables: {
             username
         },
@@ -122,6 +122,7 @@ const ProfileContainer: React.FC<IProps> = ({ match: { params } }) => {
     return (
         <ProfilePresenter
             me={me}
+            refetch={refetch}
             user={user}
             FollowingHandler={FollowingHandler}
             followingS={followingS}

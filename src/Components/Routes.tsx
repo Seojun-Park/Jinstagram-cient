@@ -8,6 +8,7 @@ import Chat from '../Routes/Chat'
 const LoggedInRoutes = () => (
     <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/profile" component={Profile} />
         <Route path="/profile/:username" component={Profile} />
         <Route path="/chat/:chatId" component={Chat} />
         <Redirect from="*" to="/" />
