@@ -43,7 +43,7 @@ const HomeContainer: React.FC<IProps> = () => {
             }
         }
     })
-    useQuery<GetFullPost, GetFullPostVariables>(GET_FULL_POST, {
+    const { refetch } = useQuery<GetFullPost, GetFullPostVariables>(GET_FULL_POST, {
         fetchPolicy: "network-only",
         variables: {
             page
@@ -67,7 +67,8 @@ const HomeContainer: React.FC<IProps> = () => {
         onCompleted: ({ UploadPost }) => {
             const { ok, err } = UploadPost;
             if (ok) {
-                window.location.reload();
+                refetch()
+                // window.location.reload();
             } else {
                 console.log(err);
             }
@@ -123,6 +124,7 @@ const HomeContainer: React.FC<IProps> = () => {
         return () => clearInterval(getLocationInterval)
     }, [setLat, setLng])
 
+    console.log(location, imageUrl)
 
     useEffect(() => {
         if (lat !== 0 && lng !== 0) {
