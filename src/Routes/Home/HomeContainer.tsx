@@ -124,7 +124,6 @@ const HomeContainer: React.FC<IProps> = () => {
         return () => clearInterval(getLocationInterval)
     }, [setLat, setLng])
 
-    console.log(location, imageUrl)
 
     useEffect(() => {
         if (lat !== 0 && lng !== 0) {

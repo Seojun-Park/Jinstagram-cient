@@ -45,7 +45,7 @@ const FeedBoxPresenter: React.FC<IProps> = ({
                 <S.ProfileImage src={posts.user.profilePhoto} />
                 <S.UserCol>
                     <S.ExtendedLink to={{
-                        pathname: '/profile',
+                        pathname: `/profile/${posts.user.username}`,
                         state: { id: posts.user.id }
                     }}><span style={{ fontWeight: 600 }}>{posts.user.username}</span></S.ExtendedLink>
                     <S.Location>{posts.location}</S.Location>
