@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/Jinstagram-client/static/js/main.8c4a6484.chunk.js",
-    "main.js.map": "/Jinstagram-client/static/js/main.8c4a6484.chunk.js.map",
+    "main.js": "/Jinstagram-client/static/js/main.62b1795f.chunk.js",
+    "main.js.map": "/Jinstagram-client/static/js/main.62b1795f.chunk.js.map",
     "runtime-main.js": "/Jinstagram-client/static/js/runtime-main.22e004dd.js",
     "runtime-main.js.map": "/Jinstagram-client/static/js/runtime-main.22e004dd.js.map",
     "static/css/2.83342f34.chunk.css": "/Jinstagram-client/static/css/2.83342f34.chunk.css",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.22e004dd.js",
     "static/css/2.83342f34.chunk.css",
     "static/js/2.4fb8e5d4.chunk.js",
-    "static/js/main.8c4a6484.chunk.js"
+    "static/js/main.62b1795f.chunk.js"
   ]
 }
