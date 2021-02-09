@@ -46,8 +46,8 @@ const authMiddle = new ApolloLink((operation: Operation, forward: any): any => {
 });
 
 const wsLink = new WebSocketLink({
-  // uri: "ws://localhost:4000/subscription",
-  uri: "ws://jinsta.herokuapp.com/subscription",
+  uri: "ws://localhost:4000/subscription",
+  // uri: "ws://jinsta.herokuapp.com/subscription",
   options: {
     reconnect: true,
     lazy: true,
@@ -58,8 +58,8 @@ const wsLink = new WebSocketLink({
 });
 
 const httpLink = new HttpLink({
-  // uri: "http://localhost:4000/graphql"
-  uri: "https://jinsta.herokuapp.com/graphql"
+  uri: "http://localhost:4000/graphql"
+  // uri: "https://jinsta.herokuapp.com/graphql"
 });
 
 const errLink = onError(({ graphqlErrors, networkError }: any) => {
