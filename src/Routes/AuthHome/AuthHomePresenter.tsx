@@ -146,6 +146,8 @@ const AuthHomePresenter: FC<IProps> = ({
                             />
                             <S.Button>Confirm</S.Button>
                         </S.Form>
+                        <S.Signup>Already have an account?{" "}</S.Signup>
+                        <S.Link onClick={() => setAction("login")}>Login</S.Link>
                     </S.Mid>
                 )}
                 {action === "confirm" && (
